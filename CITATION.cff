@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated review article and this repository."
+title: "Condition-Based Drilling Lifecycle Model Selector"
+authors:
+  - family-names: "Najafi"
+    given-names: "Iman"
+version: "0.1.0"
+date-released: "2026-07-02"
+repository-code: "https://github.com/NajafiIB/wellbore-stability-model-selector"
+url: "https://najafiib.github.io/wellbore-stability-model-selector/"
+keywords:
+  - wellbore stability
+  - geomechanics
+  - model selection
+  - drilling lifecycle
+  - Mechanical Earth Model
+abstract: "A public static decision-support tool implementing the Condition-Based Drilling Lifecycle Model-Selection Framework for wellbore-stability modelling."

@@ -1,0 +1,20 @@
+{
+  "name": "wellbore-stability-model-selector",
+  "version": "0.1.0",
+  "description": "Public static decision-support tool for the Condition-Based Drilling Lifecycle Model-Selection Framework.",
+  "type": "module",
+  "private": false,
+  "scripts": {
+    "build:data": "python scripts/build_public_data.py",
+    "test": "node tests/decision-engine.test.mjs",
+    "serve": "python -m http.server 8088"
+  },
+  "keywords": [
+    "wellbore-stability",
+    "geomechanics",
+    "model-selection",
+    "drilling",
+    "mechanical-earth-model"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Condition-Based Drilling Lifecycle Model Selector</title>
+    <meta name="description" content="A public decision-support tool for selecting wellbore-stability model families by drilling lifecycle stage, formation condition, uncertainty, validation evidence, and integrity consequence.">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">Public companion tool</p>
+        <h1>Condition-Based Drilling Lifecycle Model Selector</h1>
+        <p class="lede">Choose wellbore conditions and get a transparent model-family recommendation with validation needs and DOI-linked literature.</p>
+      </div>
+      <div class="meta-panel">
+        <span id="corpus-count">Loading records</span>
+        <span>Rule set <strong id="updated-at">loading</strong></span>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <aside class="selector-panel" aria-label="Model selection inputs">
+        <form id="selector-form">
+          <div class="panel-heading">
+            <h2>Well Condition</h2>
+            <p>Use the dominant condition, not every possible issue.</p>
+          </div>
+
+          <label>
+            Operational stage
+            <select name="stage">
+              <option value="before">Before drilling: prediction</option>
+              <option value="during">During drilling: updating</option>
+              <option value="after">After drilling: validation</option>
+            </select>
+          </label>
+
+          <label>
+            Formation or rock type
+            <select name="formation">
+              <option value="shale">Shale</option>
+              <option value="sandstone">Sandstone</option>
+              <option value="carbonate">Carbonate</option>
+              <option value="anisotropic">Anisotropic or laminated rock</option>
+              <option value="fractured">Fractured rock</option>
+              <option value="faulted">Faulted interval</option>
+              <option value="hydrate">Hydrate-bearing sediments</option>
+              <option value="general">General / uncertain</option>
+            </select>
+          </label>
+
+          <label>
+            Well geometry
+            <select name="geometry">
+              <option value="vertical">Vertical</option>
+              <option value="deviated">Deviated</option>
+              <option value="horizontal">Horizontal</option>
+              <option value="mixed">Mixed or uncertain</option>
+            </select>
+          </label>
+
+          <label>
+            Pressure-temperature context
+            <select name="pressureTemperature">
+              <option value="normal">Normal</option>
+              <option value="hpht">HPHT</option>
+              <option value="deepwater">Deepwater</option>
+              <option value="thermal">Thermally disturbed</option>
+            </select>
+          </label>
+
+          <fieldset>
+            <legend>Dominant mechanism</legend>
+            <label class="check"><input type="checkbox" name="mechanisms" value="collapse"> Breakout / collapse</label>
+            <label class="check"><input type="checkbox" name="mechanisms" value="tensile"> Tensile fracture / losses</label>
+            <label class="check"><input type="checkbox" name="mechanisms" value="weakPlane"> Weak planes / bedding</label>
+            <label class="check"><input type="checkbox" name="mechanisms" value="hydration" checked> Hydration / osmosis</label>
+            <label class="check"><input type="checkbox" name="mechanisms" value="discontinuity"> Faults / fractures</label>
+            <label class="check"><input type="checkbox" name="mechanisms" value="narrowWindow"> Narrow mud-weight window</label>
+            <label class="check"><input type="checkbox" name="mechanisms" value="realTimeSymptoms"> Real-time symptoms</label>
+            <label class="check"><input type="checkbox" name="mechanisms" value="postDrill"> Post-drill evidence</label>
+          </fieldset>
+
+          <div class="compact-grid">
+            <label>
+              Data
+              <select name="dataAvailability">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+            <label>
+              Uncertainty
+              <select name="uncertainty">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+            <label>
+              Validation
+              <select name="validationEvidence">
+                <option value="none">None yet</option>
+                <option value="lab">Laboratory</option>
+                <option value="field" selected>Field case</option>
+                <option value="multiwell">Multi-well</option>
+              </select>
+            </label>
+            <label>
+              Integrity consequence
+              <select name="integrityConsequence">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Labelled multi-well dataset
+            <select name="dataset">
+              <option value="none">No</option>
+              <option value="largeLabelled">Yes</option>
+            </select>
+          </label>
+
+          <label class="check standalone"><input type="checkbox" id="show-all-layers"> Show not-primary layers</label>
+
+          <div class="button-row">
+            <button type="submit">Update recommendation</button>
+            <button type="button" id="reset-form">Reset</button>
+          </div>
+        </form>
+      </aside>
+
+      <section class="results-panel" aria-live="polite">
+        <p id="app-error" class="error"></p>
+        <section class="result-section hero-result">
+          <h2>Recommendation</h2>
+          <p id="query-summary"></p>
+          <div id="matched-conditions" class="matched-conditions"></div>
+        </section>
+
+        <section class="result-section">
+          <div class="section-title-row">
+            <h2>Model Layers</h2>
+            <button type="button" id="export-json">Export result JSON</button>
+          </div>
+          <div class="table-wrap">
+            <table id="layer-table">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Model layer</th>
+                  <th>Why it appears</th>
+                  <th>Minimum validation evidence</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="split-results">
+          <section class="result-section">
+            <h2>Practical Decision Supported</h2>
+            <ul id="decision-list" class="plain-list"></ul>
+          </section>
+          <section class="result-section">
+            <h2>Warnings</h2>
+            <ul id="warning-list" class="plain-list"></ul>
+          </section>
+        </div>
+
+        <section class="result-section">
+          <h2>Related Articles from the Public Corpus</h2>
+          <ol id="paper-list" class="paper-list"></ol>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <p>This tool is a public companion implementation of a review-derived model-selection framework. It recommends model families, not software packages or final engineering designs.</p>
+    </footer>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
