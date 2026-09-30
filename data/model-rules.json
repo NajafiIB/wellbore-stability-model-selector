@@ -1,7 +1,7 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "frameworkName": "Condition-Based Drilling Lifecycle Model-Selection Framework",
-  "paperTitle": "A Drilling Lifecycle-Based Model-Selection Framework for Wellbore Stability: From Pre-Drill Prediction to Post-Drill Validation and Integrity",
+  "paperTitle": "Wellbore Stability Modelling for Subsurface Energy Wells: An Evidence-Mapped Review and Drilling-Lifecycle Model-Selection Framework",
   "disclaimer": "This public tool is a decision-support implementation of a review-derived framework. It recommends model families, not individual software packages, and it does not replace site-specific geomechanical design or professional engineering judgement.",
   "statusRank": {
     "R": 4,
@@ -131,6 +131,11 @@
       "id": "hpht_deepwater",
       "label": "HPHT or deepwater interval",
       "statuses": {"elasticKirsch": "Rec", "failureCriterion": "R", "mem": "R", "poroelastic": "Rec", "thmThmc": "R", "numerical": "C", "probabilistic": "Rec", "integrity": "Rec"}
+    },
+    {
+      "id": "thermal_geothermal",
+      "label": "Large thermal contrast / thermally disturbed interval",
+      "statuses": {"failureCriterion": "Rec", "mem": "R", "poroelastic": "Rec", "thmThmc": "R", "numerical": "C", "probabilistic": "Rec", "integrity": "Rec"}
     },
     {
       "id": "hydrate",

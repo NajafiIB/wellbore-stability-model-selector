@@ -44,6 +44,24 @@ assert.equal(statusFor(fractured, "numerical"), "R");
 assert.equal(statusFor(fractured, "mem"), "R");
 assert.equal(statusFor(fractured, "integrity"), "R");
 
+const thermalGeothermal = evaluateSelection({
+  stage: "before",
+  formation: "fractured",
+  geometry: "deviated",
+  pressureTemperature: "thermal",
+  mechanisms: ["discontinuity", "tensile"],
+  dataAvailability: "medium",
+  uncertainty: "high",
+  validationEvidence: "field",
+  integrityConsequence: "high",
+  dataset: "none"
+}, rules);
+
+assert.ok(thermalGeothermal.matchedRows.includes("thermal_geothermal"));
+assert.equal(statusFor(thermalGeothermal, "thmThmc"), "R");
+assert.equal(statusFor(thermalGeothermal, "numerical"), "R");
+assert.equal(statusFor(thermalGeothermal, "probabilistic"), "R");
+
 const narrowWindow = evaluateSelection({
   stage: "before",
   formation: "carbonate",
@@ -90,5 +108,6 @@ const related = rankRelatedPapers(papers, {
 
 assert.ok(related.length > 0);
 assert.ok(related.every((paper) => paper.matchScore > 0));
+assert.ok(related.every((paper) => ["Core", "Useful"].includes(paper.classification)));
 
 console.log("Decision-engine tests passed.");

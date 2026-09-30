@@ -153,7 +153,8 @@ async function init() {
   ]);
   state.rules = await rulesResponse.json();
   state.papers = await papersResponse.json();
-  corpusCount.textContent = `${state.papers.length} public records`;
+  const analyticCount = state.papers.filter((paper) => ["Core", "Useful"].includes(paper.classification)).length;
+  corpusCount.textContent = `${analyticCount} analytic / ${state.papers.length} screened records`;
   updatedAt.textContent = state.rules.version;
   form.addEventListener("change", runSelection);
   form.addEventListener("submit", (event) => {

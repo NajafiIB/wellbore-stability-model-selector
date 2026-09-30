@@ -37,6 +37,7 @@ function conditionRows(input) {
   if (formation === "shale" || formation === "anisotropic") rows.add("laminated_anisotropic");
   if (formation === "shale" && (mechanisms.includes("hydration") || mechanisms.includes("chemical"))) rows.add("reactive_shale");
   if (pressureTemperature === "hpht" || pressureTemperature === "deepwater") rows.add("hpht_deepwater");
+  if (pressureTemperature === "thermal") rows.add("thermal_geothermal");
   if (formation === "hydrate") rows.add("hydrate");
   if (formation === "fractured" || formation === "faulted" || mechanisms.includes("discontinuity")) rows.add("fractured_faulted");
   if (mechanisms.includes("narrowWindow") || input.uncertainty === "high") rows.add("narrow_window");
@@ -163,7 +164,7 @@ export function rankRelatedPapers(papers, input, layerResults, limit = 12) {
   const activeLayerIds = new Set(layerResults.filter((layer) => layer.status).map((layer) => layer.id));
 
   return papers
-    .filter((paper) => paper.doi && !["Exclude"].includes(paper.classification))
+    .filter((paper) => paper.doi && ["Core", "Useful"].includes(paper.classification))
     .map((paper) => {
       let score = 0;
       const blob = [

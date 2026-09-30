@@ -2,7 +2,7 @@
 
 The tool is a browser implementation of a review-derived model-selection framework. It uses two inputs:
 
-1. A public metadata corpus generated from the integrated 195-record review matrix.
+1. A public metadata corpus containing the 195 screened records from the integrated review matrix. Only the 190 Core or Useful records are ranked for recommendations.
 2. A transparent rule table derived from the Condition-Based Drilling Lifecycle Model-Selection Framework.
 
 The rule table maps conditions to model layers:

@@ -2,7 +2,7 @@
 
 This repository contains a public, no-login, static companion tool for the review article:
 
-**A Drilling Lifecycle-Based Model-Selection Framework for Wellbore Stability: From Pre-Drill Prediction to Post-Drill Validation and Integrity**
+**Wellbore Stability Modelling for Subsurface Energy Wells: An Evidence-Mapped Review and Drilling-Lifecycle Model-Selection Framework**
 
 The tool implements the **Condition-Based Drilling Lifecycle Model-Selection Framework**. Users select drilling stage, formation type, well geometry, dominant failure mechanism, data availability, uncertainty level, validation evidence, and integrity consequence. The tool returns recommended model families, validation needs, warnings, operational decisions supported, and DOI-linked related articles from the public metadata corpus.
 
@@ -14,6 +14,8 @@ The tool implements the **Condition-Based Drilling Lifecycle Model-Selection Fra
 - Lists related articles with DOI links.
 - Exports a JSON result for documentation or supplementary workflows.
 - Runs entirely in the browser with no database, no backend, and no login.
+
+The public metadata file contains all 195 screened records for auditability. Recommendations use only the 190 records coded Core or Useful; three Background and two Exclude records are not ranked.
 
 ## What the tool does not do
 
@@ -48,11 +50,7 @@ python -m http.server 8088
 
 ## GitHub Pages deployment
 
-1. Create a new public GitHub repository, for example `wellbore-stability-model-selector`.
-2. Upload the contents of this folder as the repository root.
-3. In GitHub, open **Settings > Pages**.
-4. Set the source to the `main` branch and `/root`.
-5. Save. GitHub will publish the static site.
+This repository is published from the `main` branch and `/root` through GitHub Pages.
 
 No Supabase, database, login, or server is needed.
 
