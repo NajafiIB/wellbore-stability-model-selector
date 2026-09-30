@@ -4,6 +4,8 @@ This repository contains a public, no-login, static companion tool for the revie
 
 **Wellbore Stability Modelling for Subsurface Energy Wells: An Evidence-Mapped Review and Drilling-Lifecycle Model-Selection Framework**
 
+Authors: **Iman Najafi and Dariusz Knez** (AGH University of Krakow). The article title and authors appear on the website's research credit panel.
+
 The tool implements the **Condition-Based Drilling Lifecycle Model-Selection Framework** across drilling, injection/operation and maintenance/workover. Users select lifecycle stage, formation type, well geometry, dominant failure mechanism, data availability, uncertainty level, validation evidence, and integrity consequence. The tool returns recommended model families, validation needs, warnings, operational decisions supported, and source-linked related articles from the public metadata corpus.
 
 ## What the tool does

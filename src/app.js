@@ -13,6 +13,8 @@ const warningList = document.querySelector("#warning-list");
 const decisionList = document.querySelector("#decision-list");
 const matchedRows = document.querySelector("#matched-conditions");
 const querySummary = document.querySelector("#query-summary");
+const summaryMetrics = document.querySelector("#summary-metrics");
+const selectedStage = document.querySelector("#selected-stage");
 const exportButton = document.querySelector("#export-json");
 const resetButton = document.querySelector("#reset-form");
 const corpusCount = document.querySelector("#corpus-count");
@@ -116,10 +118,16 @@ function renderMatchedRows(result) {
 function renderSummary(input, result) {
   const required = result.statusSummary.required.map((layer) => layer.shortLabel).join(", ") || "none";
   const recommended = result.statusSummary.recommended.map((layer) => layer.shortLabel).join(", ") || "none";
+  selectedStage.textContent = form.querySelector('[name="stage"]').selectedOptions[0].textContent.split(":")[0];
   querySummary.innerHTML = `
-    <strong>Recommended direction:</strong> required layers are ${required}. Recommended layers are ${recommended}. 
-    The result is based on ${result.matchedRows.length} matched condition row${result.matchedRows.length === 1 ? "" : "s"} from the framework.
+    <strong>Required:</strong> ${required}. <strong>Recommended:</strong> ${recommended}.
+    This assessment matches ${result.matchedRows.length} condition row${result.matchedRows.length === 1 ? "" : "s"} from the framework.
   `;
+  summaryMetrics.innerHTML = [
+    [result.statusSummary.required.length, "Required", "metric-required"],
+    [result.statusSummary.recommended.length, "Recommended", "metric-recommended"],
+    [result.statusSummary.conditional.length, "Conditional", "metric-conditional"]
+  ].map(([count, label, className]) => `<div class="summary-metric ${className}"><strong>${count}</strong><span>${label} layers</span></div>`).join("");
 }
 
 function runSelection() {
