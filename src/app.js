@@ -17,8 +17,6 @@ const summaryMetrics = document.querySelector("#summary-metrics");
 const selectedStage = document.querySelector("#selected-stage");
 const exportButton = document.querySelector("#export-json");
 const resetButton = document.querySelector("#reset-form");
-const corpusCount = document.querySelector("#corpus-count");
-const updatedAt = document.querySelector("#updated-at");
 
 function formInput() {
   const formData = new FormData(form);
@@ -165,9 +163,6 @@ async function init() {
   const basePapers = await papersResponse.json();
   const geothermalPapers = (await geothermalResponse.json()).map((paper) => ({...paper, classification: "Geothermal extension"}));
   state.papers = [...basePapers, ...geothermalPapers];
-  const analyticCount = basePapers.filter((paper) => ["Core", "Useful"].includes(paper.classification)).length;
-  corpusCount.textContent = `${analyticCount} analytic / ${basePapers.length} screened + ${geothermalPapers.length} geothermal sources`;
-  updatedAt.textContent = state.rules.version;
   form.addEventListener("change", runSelection);
   form.addEventListener("submit", (event) => {
     event.preventDefault();
