@@ -43,6 +43,8 @@ function conditionRows(input) {
   if (mechanisms.includes("narrowWindow") || input.uncertainty === "high") rows.add("narrow_window");
   if (input.stage === "during" || mechanisms.includes("realTimeSymptoms")) rows.add("real_time_symptoms");
   if (input.stage === "after" || mechanisms.includes("postDrill")) rows.add("post_drill_validation");
+  if (input.stage === "injection") rows.add("injection_operation");
+  if (input.stage === "maintenance") rows.add("maintenance_intervention");
   if (input.dataset === "largeLabelled" || mechanisms.includes("aiDataset")) rows.add("labelled_dataset");
 
   if (rows.size === 0) rows.add("early_screening");
@@ -76,6 +78,8 @@ function practicalDecision(input, statuses) {
   if (input.stage === "before") decisions.push("Pre-drill mud-weight window, trajectory envelope, casing-depth risk, and data-acquisition priorities.");
   if (input.stage === "during") decisions.push("Real-time mud-weight, ECD, mud-chemistry, hole-cleaning, MPD, or casing-timing response.");
   if (input.stage === "after") decisions.push("Back-analysis, MEM recalibration, next-well learning, and integrity lessons.");
+  if (input.stage === "injection") decisions.push("Injection or production pressure-temperature envelope, rock-fracture surveillance, and separate casing-cement barrier monitoring.");
+  if (input.stage === "maintenance") decisions.push("Locate casing, cement or formation damage; choose a workover or repair; verify integrity with a post-repair test before return to service.");
   if (statuses.probabilistic === "R" || statuses.probabilistic === "Rec") decisions.push("Risk-based pressure-window and uncertainty-margin decisions.");
   if (statuses.integrity === "R" || statuses.integrity === "Rec") decisions.push("Intervals where hole quality may affect casing running, cement placement, annular isolation, or barrier quality.");
   return decisions;
@@ -140,6 +144,8 @@ function paperStageScore(paper, stage) {
   if (stage === "before" && text.includes("before")) return 6;
   if (stage === "during" && text.includes("during")) return 6;
   if (stage === "after" && text.includes("after")) return 6;
+  if (stage === "injection" && (text.includes("injection") || text.includes("operation"))) return 28;
+  if (stage === "maintenance" && (text.includes("maintenance") || text.includes("workover"))) return 28;
   if (text.includes("cross")) return 2;
   return 0;
 }
@@ -164,7 +170,7 @@ export function rankRelatedPapers(papers, input, layerResults, limit = 12) {
   const activeLayerIds = new Set(layerResults.filter((layer) => layer.status).map((layer) => layer.id));
 
   return papers
-    .filter((paper) => paper.doi && ["Core", "Useful"].includes(paper.classification))
+    .filter((paper) => (paper.doi || paper.url) && ["Core", "Useful", "Geothermal extension"].includes(paper.classification))
     .map((paper) => {
       let score = 0;
       const blob = [
@@ -185,6 +191,7 @@ export function rankRelatedPapers(papers, input, layerResults, limit = 12) {
       score += paperStageScore(paper, input.stage);
       if (paper.classification === "Core") score += 5;
       if (paper.classification === "Useful") score += 3;
+      if (paper.classification === "Geothermal extension" && ["injection", "maintenance"].includes(input.stage)) score += 4;
       if (paper.validationStrength === "Strong") score += 3;
       if (paper.validationStrength === "Moderate") score += 2;
 
@@ -198,6 +205,8 @@ export function rankRelatedPapers(papers, input, layerResults, limit = 12) {
       if (activeLayerIds.has("numerical") && containsAny(blob, ["FEM", "FDM", "DEM", "BEM", "numerical", "finite element", "discrete element"])) score += 4;
       if (activeLayerIds.has("probabilistic") && containsAny(blob, ["uncertainty", "probabilistic", "Monte Carlo", "risk"])) score += 4;
       if (activeLayerIds.has("postDrill") && containsAny(blob, ["breakout", "DITF", "caliper", "image log", "validation", "back-analysis"])) score += 4;
+      if (input.stage === "injection" && containsAny(blob, ["injection", "injectivity", "thermal cycle", "cement sheath"])) score += 8;
+      if (input.stage === "maintenance" && containsAny(blob, ["maintenance", "workover", "reconstruction", "casing failure", "repair"])) score += 8;
 
       return {...paper, matchScore: score};
     })

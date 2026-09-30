@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "frameworkName": "Condition-Based Drilling Lifecycle Model-Selection Framework",
   "paperTitle": "Wellbore Stability Modelling for Subsurface Energy Wells: An Evidence-Mapped Review and Drilling-Lifecycle Model-Selection Framework",
   "disclaimer": "This public tool is a decision-support implementation of a review-derived framework. It recommends model families, not individual software packages, and it does not replace site-specific geomechanical design or professional engineering judgement.",
@@ -161,6 +161,16 @@
       "id": "post_drill_validation",
       "label": "Post-drill validation available",
       "statuses": {"elasticKirsch": "C", "failureCriterion": "Rec", "mem": "R", "weakPlane": "C", "poroelastic": "C", "shaleFluid": "C", "thmThmc": "C", "numerical": "C", "probabilistic": "C", "aiMl": "S", "postDrill": "R", "integrity": "R"}
+    },
+    {
+      "id": "injection_operation",
+      "label": "Geothermal injection or production operation",
+      "statuses": {"failureCriterion": "C", "mem": "Rec", "poroelastic": "C", "thmThmc": "C", "numerical": "C", "probabilistic": "Rec", "postDrill": "Rec", "integrity": "R"}
+    },
+    {
+      "id": "maintenance_intervention",
+      "label": "Maintenance, workover or re-entry",
+      "statuses": {"failureCriterion": "C", "mem": "Rec", "thmThmc": "C", "numerical": "C", "probabilistic": "Rec", "postDrill": "R", "integrity": "R"}
     },
     {
       "id": "labelled_dataset",

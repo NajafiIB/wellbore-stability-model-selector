@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Condition-Based Drilling Lifecycle Model Selector</title>
+    <title>Condition-Based Wellbore Lifecycle Model Selector</title>
     <meta name="description" content="A public decision-support tool for selecting wellbore-stability model families by drilling lifecycle stage, formation condition, uncertainty, validation evidence, and integrity consequence.">
     <link rel="stylesheet" href="./styles.css">
   </head>
@@ -11,7 +11,7 @@
     <header class="site-header">
       <div>
         <p class="eyebrow">Public companion tool</p>
-        <h1>Condition-Based Drilling Lifecycle Model Selector</h1>
+        <h1>Condition-Based Wellbore Lifecycle Model Selector</h1>
         <p class="lede">Choose wellbore conditions and get a transparent model-family recommendation with validation needs and DOI-linked literature.</p>
       </div>
       <div class="meta-panel">
@@ -34,6 +34,8 @@
               <option value="before">Before drilling: prediction</option>
               <option value="during">During drilling: updating</option>
               <option value="after">After drilling: validation</option>
+              <option value="injection">Injection / production: operation</option>
+              <option value="maintenance">Maintenance / workover: intervention</option>
             </select>
           </label>
 

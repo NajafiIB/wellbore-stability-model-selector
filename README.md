@@ -4,7 +4,7 @@ This repository contains a public, no-login, static companion tool for the revie
 
 **Wellbore Stability Modelling for Subsurface Energy Wells: An Evidence-Mapped Review and Drilling-Lifecycle Model-Selection Framework**
 
-The tool implements the **Condition-Based Drilling Lifecycle Model-Selection Framework**. Users select drilling stage, formation type, well geometry, dominant failure mechanism, data availability, uncertainty level, validation evidence, and integrity consequence. The tool returns recommended model families, validation needs, warnings, operational decisions supported, and DOI-linked related articles from the public metadata corpus.
+The tool implements the **Condition-Based Drilling Lifecycle Model-Selection Framework** across drilling, injection/operation and maintenance/workover. Users select lifecycle stage, formation type, well geometry, dominant failure mechanism, data availability, uncertainty level, validation evidence, and integrity consequence. The tool returns recommended model families, validation needs, warnings, operational decisions supported, and source-linked related articles from the public metadata corpus.
 
 ## What the tool does
 
@@ -15,7 +15,7 @@ The tool implements the **Condition-Based Drilling Lifecycle Model-Selection Fra
 - Exports a JSON result for documentation or supplementary workflows.
 - Runs entirely in the browser with no database, no backend, and no login.
 
-The public metadata file contains all 195 screened records for auditability. Recommendations use only the 190 records coded Core or Useful; three Background and two Exclude records are not ranked.
+The original public metadata file contains all 195 screened records for auditability. Recommendations use only the 190 records coded Core or Useful; three Background and two Exclude records are not ranked. A separate 18-paper geothermal extension covers drilling, completion, injection/operation, and maintenance/workover. It is ranked as a targeted source set and does not change the original review counts.
 
 ## What the tool does not do
 
@@ -62,7 +62,7 @@ https://najafiib.github.io/wellbore-stability-model-selector/
 
 ## Public data policy
 
-The public data file `data/papers.json` contains bibliographic and coding metadata only:
+The public data files `data/papers.json` and `data/geothermal-papers.json` contain bibliographic and coding metadata only:
 
 - title;
 - authors;

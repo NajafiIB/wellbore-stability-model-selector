@@ -1,6 +1,6 @@
 {
   "name": "wellbore-stability-model-selector",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Public static decision-support tool for the Condition-Based Drilling Lifecycle Model-Selection Framework.",
   "type": "module",
   "private": false,

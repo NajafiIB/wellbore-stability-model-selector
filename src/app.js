@@ -59,6 +59,7 @@ function renderLayers(result) {
 }
 
 function doiLink(paper) {
+  if (!paper.doi && paper.url) return `<a href="${paper.url}" target="_blank" rel="noopener">Source record</a>`;
   if (!paper.doi) return "";
   const doi = paper.doi.replace(/^https?:\/\/(dx\.)?doi\.org\//i, "");
   return `<a href="https://doi.org/${encodeURIComponent(doi).replace(/%2F/g, "/")}" target="_blank" rel="noopener">DOI: ${doi}</a>`;
@@ -147,14 +148,17 @@ function downloadJson() {
 }
 
 async function init() {
-  const [rulesResponse, papersResponse] = await Promise.all([
+  const [rulesResponse, papersResponse, geothermalResponse] = await Promise.all([
     fetch("./data/model-rules.json"),
-    fetch("./data/papers.json")
+    fetch("./data/papers.json"),
+    fetch("./data/geothermal-papers.json")
   ]);
   state.rules = await rulesResponse.json();
-  state.papers = await papersResponse.json();
-  const analyticCount = state.papers.filter((paper) => ["Core", "Useful"].includes(paper.classification)).length;
-  corpusCount.textContent = `${analyticCount} analytic / ${state.papers.length} screened records`;
+  const basePapers = await papersResponse.json();
+  const geothermalPapers = (await geothermalResponse.json()).map((paper) => ({...paper, classification: "Geothermal extension"}));
+  state.papers = [...basePapers, ...geothermalPapers];
+  const analyticCount = basePapers.filter((paper) => ["Core", "Useful"].includes(paper.classification)).length;
+  corpusCount.textContent = `${analyticCount} analytic / ${basePapers.length} screened + ${geothermalPapers.length} geothermal sources`;
   updatedAt.textContent = state.rules.version;
   form.addEventListener("change", runSelection);
   form.addEventListener("submit", (event) => {

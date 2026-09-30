@@ -2,8 +2,9 @@
 
 The tool is a browser implementation of a review-derived model-selection framework. It uses two inputs:
 
-1. A public metadata corpus containing the 195 screened records from the integrated review matrix. Only the 190 Core or Useful records are ranked for recommendations.
-2. A transparent rule table derived from the Condition-Based Drilling Lifecycle Model-Selection Framework.
+1. A public metadata corpus containing the 195 screened records from the integrated review matrix. Only the 190 Core or Useful records are ranked from that set.
+2. A separate, targeted 18-paper geothermal source set, with injection/operation and maintenance/workover evidence. It is not counted in the original 195/190 evidence map.
+3. A transparent rule table derived from the Condition-Based Drilling Lifecycle Model-Selection Framework.
 
 The rule table maps conditions to model layers:
 
@@ -21,7 +22,7 @@ The tool is intentionally conservative. It flags cases where model complexity is
 
 ## Main decision variables
 
-- Operational stage: before drilling, during drilling, or after drilling.
+- Operational stage: before drilling, during drilling, after drilling, injection/production operation, or maintenance/workover.
 - Formation or rock type.
 - Well geometry.
 - Pressure-temperature context.
