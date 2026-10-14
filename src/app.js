@@ -161,7 +161,7 @@ async function init() {
   ]);
   state.rules = await rulesResponse.json();
   const basePapers = await papersResponse.json();
-  const geothermalPapers = (await geothermalResponse.json()).map((paper) => ({...paper, classification: "Geothermal extension"}));
+  const geothermalPapers = await geothermalResponse.json();
   state.papers = [...basePapers, ...geothermalPapers];
   form.addEventListener("change", runSelection);
   form.addEventListener("submit", (event) => {
