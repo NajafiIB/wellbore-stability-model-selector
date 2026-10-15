@@ -137,7 +137,7 @@ function runSelection() {
   renderMatchedRows(result);
   renderLayers(result);
   renderList(decisionList, result.decisions, "No specific operational decision was inferred.");
-  renderList(warningList, result.warnings, "No major warning for this selection.");
+  renderList(warningList, [...result.warnings, ...result.requiredObservations.map((item) => `Required observation: ${item}`)], "Screening guidance only; site-specific observations are required.");
   renderPapers(papers);
 }
 

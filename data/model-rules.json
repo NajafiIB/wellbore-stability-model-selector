@@ -1,5 +1,5 @@
 {
-  "version": "0.1.5",
+  "version": "0.1.6",
   "frameworkName": "Geothermal Wellbore Stability Lifecycle Model-Selection Framework",
   "paperTitle": "An Open Source Wellbore Stability Modeling Framework for Geothermal Wells: Linking Failure Mechanisms, Evidence, and Lifecycle Decisions",
   "disclaimer": "This public tool is a decision-support implementation of a review-derived framework. It recommends model families, not individual software packages, and it does not replace site-specific geomechanical design or professional engineering judgement.",
@@ -20,176 +20,488 @@
       "id": "elasticKirsch",
       "label": "Elastic / Kirsch stress model",
       "shortLabel": "Elastic / Kirsch",
-      "themeKeywords": ["stress analysis", "mud-weight window"],
-      "paperKeywords": ["kirsch", "stress", "breakout", "DITF", "borehole wall"]
+      "themeKeywords": [
+        "stress analysis",
+        "mud-weight window"
+      ],
+      "paperKeywords": [
+        "kirsch",
+        "stress",
+        "breakout",
+        "DITF",
+        "borehole wall"
+      ]
     },
     {
       "id": "failureCriterion",
       "label": "Failure criterion",
       "shortLabel": "Failure criterion",
-      "themeKeywords": ["failure criteria", "mud-weight window"],
-      "paperKeywords": ["Mohr", "Mogi", "Lade", "Drucker", "tensile", "shear", "failure"]
+      "themeKeywords": [
+        "failure criteria",
+        "mud-weight window"
+      ],
+      "paperKeywords": [
+        "Mohr",
+        "Mogi",
+        "Lade",
+        "Drucker",
+        "tensile",
+        "shear",
+        "failure"
+      ]
     },
     {
       "id": "mem",
       "label": "Mechanical Earth Model integration",
       "shortLabel": "MEM",
-      "themeKeywords": ["MEM", "wellbore integrity", "mud-weight window"],
-      "paperKeywords": ["mechanical earth model", "MEM", "geomechanical", "wellbore stability"]
+      "themeKeywords": [
+        "MEM",
+        "wellbore integrity",
+        "mud-weight window"
+      ],
+      "paperKeywords": [
+        "mechanical earth model",
+        "MEM",
+        "geomechanical",
+        "wellbore stability"
+      ]
     },
     {
       "id": "weakPlane",
       "label": "Weak-plane / anisotropic model",
       "shortLabel": "Weak-plane / anisotropy",
-      "themeKeywords": ["failure criteria", "shale instability", "stress analysis"],
-      "paperKeywords": ["weak-plane", "anisotropy", "anisotropic", "bedding", "laminated"]
+      "themeKeywords": [
+        "failure criteria",
+        "shale instability",
+        "stress analysis"
+      ],
+      "paperKeywords": [
+        "weak-plane",
+        "anisotropy",
+        "anisotropic",
+        "bedding",
+        "laminated"
+      ]
     },
     {
       "id": "poroelastic",
       "label": "Poroelastic model",
       "shortLabel": "Poroelastic",
-      "themeKeywords": ["poroelasticity", "shale instability"],
-      "paperKeywords": ["poroelastic", "pore pressure", "Biot", "diffusion", "depletion"]
+      "themeKeywords": [
+        "poroelasticity",
+        "shale instability"
+      ],
+      "paperKeywords": [
+        "poroelastic",
+        "pore pressure",
+        "Biot",
+        "diffusion",
+        "depletion"
+      ]
     },
     {
       "id": "shaleFluid",
       "label": "Shale-fluid / chemo-mechanical model",
       "shortLabel": "Shale-fluid / chemo",
-      "themeKeywords": ["shale instability"],
-      "paperKeywords": ["shale", "hydration", "osmosis", "chemical", "drilling fluid", "water activity"]
+      "themeKeywords": [
+        "shale instability"
+      ],
+      "paperKeywords": [
+        "shale",
+        "hydration",
+        "osmosis",
+        "chemical",
+        "drilling fluid",
+        "water activity"
+      ]
     },
     {
       "id": "thmThmc",
       "label": "THM / THMC model",
       "shortLabel": "THM / THMC",
-      "themeKeywords": ["poroelasticity", "numerical modelling", "shale instability"],
-      "paperKeywords": ["thermo", "thermal", "THM", "THMC", "hydrate", "HPHT"]
+      "themeKeywords": [
+        "poroelasticity",
+        "numerical modelling",
+        "shale instability"
+      ],
+      "paperKeywords": [
+        "thermo",
+        "thermal",
+        "THM",
+        "THMC",
+        "hydrate",
+        "HPHT"
+      ]
     },
     {
       "id": "numerical",
       "label": "Numerical FEM/FDM/DEM/BEM model",
       "shortLabel": "Numerical models",
-      "themeKeywords": ["numerical modelling"],
-      "paperKeywords": ["finite element", "finite difference", "boundary element", "discrete element", "FEM", "FDM", "DEM", "BEM", "fracture"]
+      "themeKeywords": [
+        "numerical modelling"
+      ],
+      "paperKeywords": [
+        "finite element",
+        "finite difference",
+        "boundary element",
+        "discrete element",
+        "FEM",
+        "FDM",
+        "DEM",
+        "BEM",
+        "fracture"
+      ]
     },
     {
       "id": "probabilistic",
       "label": "Probabilistic uncertainty model",
       "shortLabel": "Probabilistic uncertainty",
-      "themeKeywords": ["uncertainty"],
-      "paperKeywords": ["uncertainty", "probabilistic", "Monte Carlo", "Bayesian", "risk"]
+      "themeKeywords": [
+        "uncertainty"
+      ],
+      "paperKeywords": [
+        "uncertainty",
+        "probabilistic",
+        "Monte Carlo",
+        "Bayesian",
+        "risk"
+      ]
     },
     {
       "id": "aiMl",
       "label": "AI/ML support layer",
       "shortLabel": "AI/ML support",
-      "themeKeywords": ["AI/ML"],
-      "paperKeywords": ["machine learning", "AI", "neural", "data-driven", "random forest", "support vector"]
+      "themeKeywords": [
+        "AI/ML"
+      ],
+      "paperKeywords": [
+        "machine learning",
+        "AI",
+        "neural",
+        "data-driven",
+        "random forest",
+        "support vector"
+      ]
     },
     {
       "id": "postDrill",
       "label": "Post-drill back-analysis",
       "shortLabel": "Post-drill back-analysis",
-      "themeKeywords": ["stress analysis", "wellbore integrity", "MEM"],
-      "paperKeywords": ["back-analysis", "caliper", "image log", "breakout", "DITF", "validation"]
+      "themeKeywords": [
+        "stress analysis",
+        "wellbore integrity",
+        "MEM"
+      ],
+      "paperKeywords": [
+        "back-analysis",
+        "caliper",
+        "image log",
+        "breakout",
+        "DITF",
+        "validation"
+      ]
     },
     {
       "id": "integrity",
       "label": "Integrity linkage",
       "shortLabel": "Integrity linkage",
-      "themeKeywords": ["wellbore integrity"],
-      "paperKeywords": ["integrity", "casing", "cement", "annular", "barrier", "leakage"]
+      "themeKeywords": [
+        "wellbore integrity"
+      ],
+      "paperKeywords": [
+        "integrity",
+        "casing",
+        "cement",
+        "annular",
+        "barrier",
+        "leakage"
+      ]
     }
   ],
   "heatmapRows": [
     {
       "id": "early_screening",
       "label": "Early screening, limited data",
-      "statuses": {"elasticKirsch": "R", "failureCriterion": "R", "mem": "C", "probabilistic": "Rec"}
+      "statuses": {
+        "elasticKirsch": "R",
+        "failureCriterion": "R",
+        "mem": "C",
+        "probabilistic": "Rec"
+      }
     },
     {
       "id": "competent_sandstone_carbonate",
       "label": "Competent sandstone/carbonate",
-      "statuses": {"elasticKirsch": "R", "failureCriterion": "R", "mem": "Rec", "numerical": "C", "probabilistic": "C", "integrity": "C"}
+      "statuses": {
+        "elasticKirsch": "R",
+        "failureCriterion": "R",
+        "mem": "Rec",
+        "numerical": "C",
+        "probabilistic": "C",
+        "integrity": "C"
+      }
     },
     {
       "id": "deviated_horizontal",
       "label": "Deviated or horizontal well",
-      "statuses": {"elasticKirsch": "R", "failureCriterion": "R", "mem": "Rec", "weakPlane": "C", "numerical": "C", "probabilistic": "Rec", "integrity": "C"}
+      "statuses": {
+        "elasticKirsch": "R",
+        "failureCriterion": "R",
+        "mem": "Rec",
+        "weakPlane": "C",
+        "numerical": "C",
+        "probabilistic": "Rec",
+        "integrity": "C"
+      }
     },
     {
       "id": "laminated_anisotropic",
       "label": "Laminated shale / anisotropic rock",
-      "statuses": {"elasticKirsch": "Rec", "failureCriterion": "R", "mem": "Rec", "weakPlane": "R", "poroelastic": "C", "shaleFluid": "C", "numerical": "C", "probabilistic": "Rec", "integrity": "C"}
+      "statuses": {
+        "elasticKirsch": "Rec",
+        "failureCriterion": "R",
+        "mem": "Rec",
+        "weakPlane": "R",
+        "poroelastic": "C",
+        "shaleFluid": "C",
+        "numerical": "C",
+        "probabilistic": "Rec",
+        "integrity": "C"
+      }
     },
     {
       "id": "reactive_shale",
       "label": "Reactive shale / hydration risk",
-      "statuses": {"elasticKirsch": "Rec", "failureCriterion": "R", "mem": "Rec", "weakPlane": "C", "poroelastic": "R", "shaleFluid": "R", "thmThmc": "C", "numerical": "C", "probabilistic": "Rec", "aiMl": "S", "integrity": "Rec"}
+      "statuses": {
+        "elasticKirsch": "Rec",
+        "failureCriterion": "R",
+        "mem": "Rec",
+        "weakPlane": "C",
+        "poroelastic": "R",
+        "shaleFluid": "R",
+        "thmThmc": "C",
+        "numerical": "C",
+        "probabilistic": "Rec",
+        "aiMl": "S",
+        "integrity": "Rec"
+      }
     },
     {
       "id": "hpht_deepwater",
       "label": "HPHT or deepwater interval",
-      "statuses": {"elasticKirsch": "Rec", "failureCriterion": "R", "mem": "R", "poroelastic": "Rec", "thmThmc": "R", "numerical": "C", "probabilistic": "Rec", "integrity": "Rec"}
+      "statuses": {
+        "elasticKirsch": "Rec",
+        "failureCriterion": "R",
+        "mem": "R",
+        "poroelastic": "Rec",
+        "thmThmc": "R",
+        "numerical": "C",
+        "probabilistic": "Rec",
+        "integrity": "Rec"
+      }
     },
     {
       "id": "thermal_geothermal",
       "label": "Large thermal contrast / thermally disturbed interval",
-      "statuses": {"failureCriterion": "Rec", "mem": "R", "poroelastic": "Rec", "thmThmc": "R", "numerical": "C", "probabilistic": "Rec", "integrity": "Rec"}
+      "statuses": {
+        "failureCriterion": "Rec",
+        "mem": "R",
+        "poroelastic": "Rec",
+        "thmThmc": "R",
+        "numerical": "C",
+        "probabilistic": "Rec",
+        "integrity": "Rec"
+      }
     },
     {
       "id": "hydrate",
       "label": "Hydrate-bearing sediments",
-      "statuses": {"failureCriterion": "C", "mem": "R", "poroelastic": "Rec", "thmThmc": "R", "numerical": "Rec", "probabilistic": "C", "postDrill": "C", "integrity": "Rec"}
+      "statuses": {
+        "failureCriterion": "C",
+        "mem": "R",
+        "poroelastic": "Rec",
+        "thmThmc": "R",
+        "numerical": "Rec",
+        "probabilistic": "C",
+        "postDrill": "C",
+        "integrity": "Rec"
+      }
     },
     {
       "id": "fractured_faulted",
       "label": "Faulted or fractured rock",
-      "statuses": {"elasticKirsch": "C", "failureCriterion": "Rec", "mem": "R", "weakPlane": "C", "thmThmc": "C", "numerical": "R", "probabilistic": "Rec", "postDrill": "Rec", "integrity": "R"}
+      "statuses": {
+        "elasticKirsch": "C",
+        "failureCriterion": "Rec",
+        "mem": "R",
+        "weakPlane": "C",
+        "thmThmc": "C",
+        "numerical": "R",
+        "probabilistic": "Rec",
+        "postDrill": "Rec",
+        "integrity": "R"
+      }
     },
     {
       "id": "narrow_window",
       "label": "Narrow mud-weight window",
-      "statuses": {"elasticKirsch": "R", "failureCriterion": "R", "mem": "R", "weakPlane": "C", "poroelastic": "C", "thmThmc": "C", "numerical": "C", "probabilistic": "R", "integrity": "Rec"}
+      "statuses": {
+        "elasticKirsch": "R",
+        "failureCriterion": "R",
+        "mem": "R",
+        "weakPlane": "C",
+        "poroelastic": "C",
+        "thmThmc": "C",
+        "numerical": "C",
+        "probabilistic": "R",
+        "integrity": "Rec"
+      }
     },
     {
       "id": "real_time_symptoms",
       "label": "Real-time instability symptoms",
-      "statuses": {"elasticKirsch": "C", "failureCriterion": "Rec", "mem": "R", "weakPlane": "C", "poroelastic": "C", "shaleFluid": "C", "thmThmc": "C", "numerical": "C", "probabilistic": "Rec", "aiMl": "S", "postDrill": "C", "integrity": "Rec"}
+      "statuses": {
+        "elasticKirsch": "C",
+        "failureCriterion": "Rec",
+        "mem": "R",
+        "weakPlane": "C",
+        "poroelastic": "C",
+        "shaleFluid": "C",
+        "thmThmc": "C",
+        "numerical": "C",
+        "probabilistic": "Rec",
+        "aiMl": "S",
+        "postDrill": "C",
+        "integrity": "Rec"
+      }
     },
     {
       "id": "post_drill_validation",
       "label": "Post-drill validation available",
-      "statuses": {"elasticKirsch": "C", "failureCriterion": "Rec", "mem": "R", "weakPlane": "C", "poroelastic": "C", "shaleFluid": "C", "thmThmc": "C", "numerical": "C", "probabilistic": "C", "aiMl": "S", "postDrill": "R", "integrity": "R"}
+      "statuses": {
+        "elasticKirsch": "C",
+        "failureCriterion": "Rec",
+        "mem": "R",
+        "weakPlane": "C",
+        "poroelastic": "C",
+        "shaleFluid": "C",
+        "thmThmc": "C",
+        "numerical": "C",
+        "probabilistic": "C",
+        "aiMl": "S",
+        "postDrill": "R",
+        "integrity": "R"
+      }
     },
     {
       "id": "injection_operation",
       "label": "Geothermal injection or production operation",
-      "statuses": {"failureCriterion": "C", "mem": "Rec", "poroelastic": "C", "thmThmc": "C", "numerical": "C", "probabilistic": "Rec", "postDrill": "Rec", "integrity": "R"}
+      "statuses": {
+        "failureCriterion": "C",
+        "mem": "Rec",
+        "poroelastic": "C",
+        "thmThmc": "C",
+        "numerical": "C",
+        "probabilistic": "Rec",
+        "postDrill": "Rec",
+        "integrity": "R"
+      }
     },
     {
       "id": "maintenance_intervention",
       "label": "Maintenance, workover or re-entry",
-      "statuses": {"failureCriterion": "C", "mem": "Rec", "thmThmc": "C", "numerical": "C", "probabilistic": "Rec", "postDrill": "R", "integrity": "R"}
+      "statuses": {
+        "failureCriterion": "C",
+        "mem": "Rec",
+        "thmThmc": "C",
+        "numerical": "C",
+        "probabilistic": "Rec",
+        "postDrill": "R",
+        "integrity": "R"
+      }
     },
     {
       "id": "labelled_dataset",
       "label": "Large labelled multi-well dataset",
-      "statuses": {"mem": "Rec", "probabilistic": "Rec", "aiMl": "Rec", "postDrill": "Rec", "integrity": "C"}
+      "statuses": {
+        "mem": "Rec",
+        "probabilistic": "Rec",
+        "aiMl": "Rec",
+        "postDrill": "Rec",
+        "integrity": "C"
+      }
     }
   ],
   "validationByLayer": {
-    "elasticKirsch": ["Breakout/DITF orientation", "LOT/FIT", "caliper trend", "offset-well event match"],
-    "failureCriterion": ["Laboratory strength calibration", "collapse or breakout interval comparison", "tensile-fracture/loss evidence"],
-    "mem": ["Offset wells", "logs", "pressure tests", "drilling events", "post-drill calibration"],
-    "weakPlane": ["Bedding orientation", "weak-plane strength", "image logs", "breakout/collapse match"],
-    "poroelastic": ["Permeability/core data", "pressure response", "time-dependent instability match"],
-    "shaleFluid": ["Shale-fluid tests", "mineralogy", "water activity", "exposure-time evidence"],
-    "thmThmc": ["Temperature profile", "thermal properties", "pressure-temperature field evidence"],
-    "numerical": ["Field-event match", "laboratory calibration", "mesh/parameter sensitivity"],
-    "probabilistic": ["Justified input ranges", "sensitivity analysis", "Monte Carlo or Bayesian validation against events"],
-    "aiMl": ["External validation", "feature transparency", "uncertainty reporting", "comparison with geomechanical baseline"],
-    "postDrill": ["Breakouts", "DITFs", "calipers", "losses", "image logs", "casing/cementing records"],
-    "integrity": ["Hole enlargement", "casing-running records", "cementing records", "pressure/barrier tests"]
+    "elasticKirsch": [
+      "Breakout/DITF orientation",
+      "LOT/FIT",
+      "caliper trend",
+      "offset-well event match"
+    ],
+    "failureCriterion": [
+      "Laboratory strength calibration",
+      "collapse or breakout interval comparison",
+      "tensile-fracture/loss evidence"
+    ],
+    "mem": [
+      "Offset wells",
+      "logs",
+      "pressure tests",
+      "drilling events",
+      "post-drill calibration"
+    ],
+    "weakPlane": [
+      "Bedding orientation",
+      "weak-plane strength",
+      "image logs",
+      "breakout/collapse match"
+    ],
+    "poroelastic": [
+      "Permeability/core data",
+      "pressure response",
+      "time-dependent instability match"
+    ],
+    "shaleFluid": [
+      "Shale-fluid tests",
+      "mineralogy",
+      "water activity",
+      "exposure-time evidence"
+    ],
+    "thmThmc": [
+      "Temperature profile",
+      "thermal properties",
+      "pressure-temperature field evidence"
+    ],
+    "numerical": [
+      "Field-event match",
+      "laboratory calibration",
+      "mesh/parameter sensitivity"
+    ],
+    "probabilistic": [
+      "Justified input ranges",
+      "sensitivity analysis",
+      "Monte Carlo or Bayesian validation against events"
+    ],
+    "aiMl": [
+      "External validation",
+      "feature transparency",
+      "uncertainty reporting",
+      "comparison with geomechanical baseline"
+    ],
+    "postDrill": [
+      "Breakouts",
+      "DITFs",
+      "calipers",
+      "losses",
+      "image logs",
+      "casing/cementing records"
+    ],
+    "integrity": [
+      "Hole enlargement",
+      "casing-running records",
+      "cementing records",
+      "pressure/barrier tests"
+    ]
   }
 }

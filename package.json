@@ -1,12 +1,12 @@
 {
   "name": "wellbore-stability-model-selector",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Public static decision-support tool for geothermal wellbore-stability model selection across the well lifecycle.",
   "type": "module",
   "private": false,
   "scripts": {
     "build:data": "python scripts/build_public_data.py",
-    "test": "node tests/decision-engine.test.mjs",
+    "test": "node tests/decision-engine.test.mjs && node tests/revision-regression.test.mjs",
     "serve": "python -m http.server 8088"
   },
   "keywords": [

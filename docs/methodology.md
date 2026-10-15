@@ -1,40 +1,29 @@
-# Methodology
+# Methodology and evidence boundaries
 
-The tool is a browser implementation of a review-derived model-selection framework. It uses two inputs:
+This companion to **An Open Source Wellbore Stability Modeling Framework for Geothermal Wells: Linking Failure Mechanisms, Evidence, and Lifecycle Decisions**, by **Iman Najafi and Dariusz Knez**, implements an explicit condition-to-model-layer table.
 
-1. A public metadata corpus containing the 195 screened records from the integrated review matrix. Only the 190 Core or Useful records are ranked from that set.
-2. A separate, targeted 18-paper geothermal source set, with injection/operation and maintenance/workover evidence. It is not counted in the original 195/190 evidence map.
-3. A transparent rule table derived from the Condition-Based Drilling Lifecycle Model-Selection Framework.
+## Literature and source roles
 
-The rule table maps conditions to model layers:
+OpenAlex supports discovery and citation tracing; citation counts indicate scholarly influence, not scientific reliability. Crossref supports identifier and bibliographic checks. Publisher platforms and conference archives provide article records and accessible texts. Article type, reviewed material and claim-specific evidence must be checked separately. Historical scores and field/laboratory labels are not validated quality grades.
 
-- `R`: Required
-- `Rec`: Recommended
-- `C`: Conditional
-- `S`: Support-only
-- blank: Not primary
+The public source catalogue comprises 208 analytic records and five audit-only records. Its 18 geothermal-extension records are already included in the 208. Reopened screening and manuscript evidence reconciliation are being prepared for author review; this catalogue must not be represented as the final result of that screening. The legacy build:data command does not rebuild the integrated catalogue.
 
-The framework follows the minimum-model principle:
+## Rule interpretation
 
-> Use the simplest model family that captures the dominant instability mechanism, supports the operational decision, and can be checked against field or laboratory evidence.
+Required means that omitting a layer conflicts with the user-declared mechanism and decision. Recommended means normally consider the layer, subject to local sensitivity and evidence. Conditional means its use requires further mechanism/data justification. Support Only indicates an auxiliary diagnostic layer. The assignments are engineering judgments informed by mechanism studies. When several conditions apply, the highest category for each layer is retained.
 
-The tool is intentionally conservative. It flags cases where model complexity is high but data availability or validation evidence is weak. AI/ML is treated as a support layer unless labelled multi-well data, external validation, uncertainty reporting, and physics-informed features are available.
+The thermal flag is an analyst assessment that thermal loading could alter the decision; geothermal use alone does not activate it. The tool has no numerical temperature cutoff. A fracture/fault condition denotes connected-fracture behaviour; an intact tensile-fracture threshold is not a circulation-loss threshold. Creep requires a separate, material-specific constitutive assessment.
 
-## Main decision variables
+## Missing inputs and operating limits
 
-- Operational stage: before drilling, during drilling, after drilling, injection/production operation, or maintenance/workover.
-- Formation or rock type.
-- Well geometry.
-- Pressure-temperature context.
-- Dominant failure mechanism.
-- Data availability.
-- Uncertainty level.
-- Validation evidence.
-- Integrity consequence.
-- Availability of a labelled multi-well dataset.
+Every result is labelled `screening-guidance` and returns `operatingLimit: null`. The tool does not ingest the numerical stress, strength, fracture-connectivity or temperature history needed to compute a pressure or lifetime limit. Required observations are displayed with the result and included in JSON exports. A high data-availability selection does not certify that these observations exist or that a model has been independently tested.
+
+## Evaluation and versions
+
+Version 0.1.5 is the frozen rule baseline for the manuscript demonstrations and categorical sensitivity checks. Version 0.1.6 is a revision candidate that adds an explicit output status and observation requirements. Its categorical assignments are unchanged and are tested separately. Software tests establish rule execution, not predictive accuracy. GRT-2, Soultz and the Polish reconstruction examples informed the discussion and are demonstrations, not a reserved independent test set.
+
+An independent case evaluation requires published cases outside rule development, rules and case inputs frozen before outcome review, a predefined simpler comparator, and reporting of disagreements as well as agreements. No independently held-out selector accuracy is claimed here.
 
 ## Literature matching
 
-The related-paper list is ranked by matching the selected conditions and activated model layers against public metadata fields, including lifecycle stage, technical theme, model type, failure criterion, formation type, well type, validation basis, and relevance notes.
-
-The ranking is a navigation aid. It is not a bibliometric score and should not be interpreted as a final quality ranking of papers.
+Related-paper ranking uses topical and lifecycle matching. It is a navigation aid, not a reliability score. Results should be checked in the source article before use in a design decision.

@@ -149,4 +149,16 @@ assert.ok(rankRelatedPapers(combined, maintenanceInput, maintenance.layerResults
 const creep = evaluateSelection({...maintenanceInput, mechanisms: ["creep"]}, rules);
 assert.ok(creep.warnings.some((warning) => warning.includes("outside this categorical rule set")));
 
+for (const result of [injection, maintenance, creep]) {
+  assert.equal(result.recommendationStatus, "screening-guidance");
+  assert.equal(result.operatingLimit, null);
+  assert.ok(result.requiredObservations.length >= 3);
+}
+assert.ok(injection.requiredObservations.some((item) => item.includes("connectivity")));
+assert.ok(injection.requiredObservations.some((item) => item.includes("temperature histories")));
+assert.ok(creep.requiredObservations.some((item) => item.includes("time-dependent deformation")));
+const missingInputs = evaluateSelection({}, rules);
+assert.equal(missingInputs.operatingLimit, null);
+assert.ok(missingInputs.warnings[0].includes("Screening guidance only"));
+
 console.log("Decision-engine tests passed.");

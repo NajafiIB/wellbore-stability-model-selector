@@ -52,7 +52,7 @@ function conditionRows(input) {
 }
 
 function buildWarnings(input, statuses) {
-  const warnings = [];
+  const warnings = ["Screening guidance only. This tool selects modelling layers; it does not calculate or certify a safe pressure, temperature, or service-life limit. Confirm the listed observations before a design decision."];
   const mechanisms = selectedMechanisms(input);
 
   if (input.dataAvailability === "low" && ["numerical", "thmThmc", "shaleFluid"].some((id) => statuses[id] === "R")) {
@@ -74,6 +74,28 @@ function buildWarnings(input, statuses) {
     warnings.push("Long-term creep is outside this categorical rule set. A site-specific time-dependent constitutive analysis and independent deformation or integrity observations are needed before a lifetime stability decision.");
   }
   return warnings;
+}
+
+export function requiredObservations(input) {
+  const observations = [
+    "Stress orientation and magnitude ranges, pore pressure, and their measurement or inversion basis.",
+    "Formation-specific strength, elastic properties, well geometry, and loading history.",
+    "A stated prediction target and observations reserved from calibration for testing."
+  ];
+  const mechanisms = selectedMechanisms(input);
+  if (["fractured", "faulted"].includes(input.formation) || mechanisms.includes("discontinuity")) {
+    observations.push("Fracture orientation and connectivity, loss depths, dynamic pressure at loss onset, and injection or pressure-test response. Intact-rock fracture initiation is not a connected-fracture loss threshold.");
+  }
+  if (input.pressureTemperature === "thermal" || input.stage === "injection") {
+    observations.push("Formation and fluid temperature histories, thermal properties, injection/production rates and pressures, and duration or cycling of the load.");
+  }
+  if (input.stage === "maintenance" || input.integrityConsequence === "high") {
+    observations.push("Casing and cement condition, inspection logs, pressure/leak tests, and post-intervention observations separated from rock-stability evidence.");
+  }
+  if (mechanisms.includes("creep")) {
+    observations.push("Material-specific time-dependent deformation tests and repeated well-scale deformation observations. A creep law is not selected by this tool.");
+  }
+  return observations;
 }
 
 function practicalDecision(input, statuses) {
@@ -128,6 +150,9 @@ export function evaluateSelection(input, rules) {
     matchedRows,
     layerResults,
     warnings: buildWarnings(input, statuses),
+    recommendationStatus: "screening-guidance",
+    operatingLimit: null,
+    requiredObservations: requiredObservations(input),
     decisions: practicalDecision(input, statuses),
     statusSummary: summarizeStatuses(layerResults)
   };
