@@ -1,7 +1,7 @@
 {
-  "version": "0.1.4",
-  "frameworkName": "Condition-Based Drilling Lifecycle Model-Selection Framework",
-  "paperTitle": "Wellbore Stability Modelling for Subsurface Energy Wells: An Evidence-Mapped Review and Drilling-Lifecycle Model-Selection Framework",
+  "version": "0.1.5",
+  "frameworkName": "Geothermal Wellbore Stability Lifecycle Model-Selection Framework",
+  "paperTitle": "An Open Source Wellbore Stability Modeling Framework for Geothermal Wells: Linking Failure Mechanisms, Evidence, and Lifecycle Decisions",
   "disclaimer": "This public tool is a decision-support implementation of a review-derived framework. It recommends model families, not individual software packages, and it does not replace site-specific geomechanical design or professional engineering judgement.",
   "statusRank": {
     "R": 4,

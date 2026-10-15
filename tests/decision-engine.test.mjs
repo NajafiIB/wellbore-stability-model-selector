@@ -4,10 +4,14 @@ import {evaluateSelection, rankRelatedPapers} from "../src/decisionEngine.js";
 
 const rules = JSON.parse(await readFile(new URL("../data/model-rules.json", import.meta.url), "utf8"));
 const papers = JSON.parse(await readFile(new URL("../data/papers.json", import.meta.url), "utf8"));
-const geothermalPapers = JSON.parse(await readFile(new URL("../data/geothermal-papers.json", import.meta.url), "utf8"))
-  .map((paper) => ({...paper, classification: "Geothermal extension"}));
+const geothermalPapers = JSON.parse(await readFile(new URL("../data/geothermal-papers.json", import.meta.url), "utf8"));
 assert.equal(geothermalPapers.length, 18);
 assert.equal(new Set(geothermalPapers.map((paper) => paper.id)).size, 18);
+const combined = [...papers, ...geothermalPapers];
+assert.equal(combined.length, 213);
+assert.equal(new Set(combined.map((paper) => paper.id)).size, 213);
+assert.equal(combined.filter((paper) => paper.classification === "Core").length, 143);
+assert.equal(combined.filter((paper) => paper.classification === "Useful").length, 65);
 
 function statusFor(result, layerId) {
   return result.layerResults.find((layer) => layer.id === layerId)?.status || "";
@@ -81,6 +85,12 @@ const narrowWindow = evaluateSelection({
 
 assert.equal(statusFor(narrowWindow, "probabilistic"), "R");
 
+const uncertainButNotNarrow = evaluateSelection({stage: "before", formation: "general",
+  geometry: "vertical", mechanisms: [], dataAvailability: "medium", uncertainty: "high",
+  validationEvidence: "lab", integrityConsequence: "medium", dataset: "none"}, rules);
+assert.ok(!uncertainButNotNarrow.matchedRows.includes("narrow_window"));
+assert.equal(statusFor(uncertainButNotNarrow, "probabilistic"), "R");
+
 const aiDataset = evaluateSelection({
   stage: "after",
   formation: "general",
@@ -125,15 +135,18 @@ assert.ok(injection.matchedRows.includes("injection_operation"));
 assert.equal(statusFor(injection, "thmThmc"), "R");
 assert.equal(statusFor(injection, "integrity"), "R");
 assert.ok(injection.decisions.some((decision) => decision.includes("pressure-temperature envelope")));
-assert.ok(rankRelatedPapers([...papers, ...geothermalPapers], injectionInput, injection.layerResults, 12)
-  .some((paper) => paper.classification === "Geothermal extension" && /Injection|Operation/.test(paper.stage)));
+assert.ok(rankRelatedPapers(combined, injectionInput, injection.layerResults, 12)
+  .some((paper) => paper.id.startsWith("GEO-") && /Injection|Operation/.test(paper.stage)));
 
 const maintenanceInput = {...injectionInput, stage: "maintenance", pressureTemperature: "normal", mechanisms: []};
 const maintenance = evaluateSelection(maintenanceInput, rules);
 assert.ok(maintenance.matchedRows.includes("maintenance_intervention"));
 assert.equal(statusFor(maintenance, "postDrill"), "R");
 assert.equal(statusFor(maintenance, "integrity"), "R");
-assert.ok(rankRelatedPapers([...papers, ...geothermalPapers], maintenanceInput, maintenance.layerResults, 12)
-  .some((paper) => paper.classification === "Geothermal extension" && /Maintenance|Workover/.test(paper.stage)));
+assert.ok(rankRelatedPapers(combined, maintenanceInput, maintenance.layerResults, 12)
+  .some((paper) => paper.id.startsWith("GEO-") && /Maintenance|Workover/.test(paper.stage)));
+
+const creep = evaluateSelection({...maintenanceInput, mechanisms: ["creep"]}, rules);
+assert.ok(creep.warnings.some((warning) => warning.includes("outside this categorical rule set")));
 
 console.log("Decision-engine tests passed.");

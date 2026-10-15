@@ -40,7 +40,7 @@ function conditionRows(input) {
   if (pressureTemperature === "thermal") rows.add("thermal_geothermal");
   if (formation === "hydrate") rows.add("hydrate");
   if (formation === "fractured" || formation === "faulted" || mechanisms.includes("discontinuity")) rows.add("fractured_faulted");
-  if (mechanisms.includes("narrowWindow") || input.uncertainty === "high") rows.add("narrow_window");
+  if (mechanisms.includes("narrowWindow")) rows.add("narrow_window");
   if (input.stage === "during" || mechanisms.includes("realTimeSymptoms")) rows.add("real_time_symptoms");
   if (input.stage === "after" || mechanisms.includes("postDrill")) rows.add("post_drill_validation");
   if (input.stage === "injection") rows.add("injection_operation");
@@ -69,6 +69,9 @@ function buildWarnings(input, statuses) {
   }
   if (input.validationEvidence === "none") {
     warnings.push("No validation evidence was selected. Treat the recommendation as screening-level until checked against field, laboratory, image-log, caliper, loss, or multi-well evidence.");
+  }
+  if (mechanisms.includes("creep")) {
+    warnings.push("Long-term creep is outside this categorical rule set. A site-specific time-dependent constitutive analysis and independent deformation or integrity observations are needed before a lifetime stability decision.");
   }
   return warnings;
 }
@@ -170,7 +173,7 @@ export function rankRelatedPapers(papers, input, layerResults, limit = 12) {
   const activeLayerIds = new Set(layerResults.filter((layer) => layer.status).map((layer) => layer.id));
 
   return papers
-    .filter((paper) => (paper.doi || paper.url) && ["Core", "Useful", "Geothermal extension"].includes(paper.classification))
+    .filter((paper) => (paper.doi || paper.url) && ["Core", "Useful"].includes(paper.classification))
     .map((paper) => {
       let score = 0;
       const blob = [
@@ -191,9 +194,7 @@ export function rankRelatedPapers(papers, input, layerResults, limit = 12) {
       score += paperStageScore(paper, input.stage);
       if (paper.classification === "Core") score += 5;
       if (paper.classification === "Useful") score += 3;
-      if (paper.classification === "Geothermal extension" && ["injection", "maintenance"].includes(input.stage)) score += 4;
-      if (paper.validationStrength === "Strong") score += 3;
-      if (paper.validationStrength === "Moderate") score += 2;
+      if (paper.id?.startsWith("GEO-") && ["injection", "maintenance"].includes(input.stage)) score += 4;
 
       for (const term of terms) {
         if (term && normalizeText(term).length > 2 && containsAny(blob, [term])) score += 1;
@@ -213,9 +214,6 @@ export function rankRelatedPapers(papers, input, layerResults, limit = 12) {
     .filter((paper) => paper.matchScore > 0)
     .sort((a, b) => {
       if (b.matchScore !== a.matchScore) return b.matchScore - a.matchScore;
-      const scoreA = Number(a.confidenceScore || 0);
-      const scoreB = Number(b.confidenceScore || 0);
-      if (scoreB !== scoreA) return scoreB - scoreA;
       return Number(b.year || 0) - Number(a.year || 0);
     })
     .slice(0, limit);

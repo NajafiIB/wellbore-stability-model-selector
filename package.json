@@ -1,7 +1,7 @@
 {
   "name": "wellbore-stability-model-selector",
-  "version": "0.1.4",
-  "description": "Public static decision-support tool for the Condition-Based Drilling Lifecycle Model-Selection Framework.",
+  "version": "0.1.5",
+  "description": "Public static decision-support tool for geothermal wellbore-stability model selection across the well lifecycle.",
   "type": "module",
   "private": false,
   "scripts": {
