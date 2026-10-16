@@ -4,7 +4,7 @@ This repository contains a public, no-login, static companion tool for the revie
 
 **An Open Source Wellbore Stability Modeling Framework for Geothermal Wells: Linking Failure Mechanisms, Evidence, and Lifecycle Decisions**
 
-Authors: **Iman Najafi and Dariusz Knez** (AGH University of Krakow). The article title and authors appear on the website's research credit panel.
+Authors: **Iman Najafi** (World Business Council, Warsaw) and **Dariusz Knez** (AGH University of Krakow). The article title and authors appear on the website's research credit panel.
 
 The tool implements the **Geothermal Wellbore Stability Lifecycle Model-Selection Framework** across drilling, injection/operation and maintenance/workover. Users select lifecycle stage, formation type, well geometry, dominant failure mechanism, data availability, uncertainty level, validation evidence, and integrity consequence. The tool returns recommended model families, validation needs, warnings, operational decisions supported, and source-linked related articles from the public metadata corpus.
 
@@ -17,11 +17,11 @@ The tool implements the **Geothermal Wellbore Stability Lifecycle Model-Selectio
 - Exports a JSON result for documentation or supplementary workflows.
 - Runs entirely in the browser with no database, no backend, and no login.
 
-The public metadata files retain the submission-era catalogue. They are not the reconciled author-review S1: identical headline totals do not imply identical membership. Audit-only records are excluded from related-paper ranking. Reproduce current manuscript counts and appraisal conclusions from reconciled S1, not from website results. See the [full methodology](docs/methodology.md) for the current evidence and version boundaries.
+The analytical corpus is defined by Supplementary Material S1. The website literature catalogue supports topic navigation and does not define manuscript inclusion decisions or counts; its coverage is not identical to S1. Audit-only catalogue records are excluded from related-paper ranking. See the [full methodology](docs/methodology.md).
 
 ## Methodology and evidence
 
-Read the [public methodology page](https://najafiib.github.io/wellbore-stability-model-selector/methodology.html) or its [Markdown source](docs/methodology.md). It covers discovery and exact queries, eligibility, duplicate handling, existing Excel assessments, claim appraisal, rule interpretation, uncertainty, external case evaluation and remaining work.
+Read the [public methodology page](https://najafiib.github.io/wellbore-stability-model-selector/methodology.html) or its [Markdown source](docs/methodology.md). It covers source identification, eligibility, duplicate handling, evidence extraction and claim appraisal, rule interpretation, uncertainty, external case evaluation and scope of inference.
 
 The checked-in public page is generated from that Markdown source with `python scripts/build_methodology.py`. Run `python scripts/build_methodology.py --check` to verify parity. The page is static and requires no browser-side Markdown rendering.
 
@@ -87,12 +87,12 @@ The public data files `data/papers.json` and `data/geothermal-papers.json` conta
 
 It does **not** include copyrighted paper text or PDFs.
 
-The `build:data` script is retained for the earlier WBS-only source workflow. It must not be used as a complete regeneration of the submitted 208-record S1 inventory until the integrated matrix is supplied to the build. The versioned JSON files in this repository are the current public metadata snapshot.
+The `build:data` command accepts the WBS source schema only. The complete website catalogue comprises both `data/papers.json` and `data/geothermal-papers.json`; this command is not an integrated-corpus builder.
 
 ## Citation
 
 If you use the tool, cite the associated review article and this repository. The file `CITATION.cff` provides citation metadata that GitHub can display automatically.
 
-## Deployed version 0.1.6
+## Software and evaluation
 
-Adds explicit screening-guidance status, a null operating-limit field, and condition-specific required observations to UI and JSON results. Categorical assignments remain those of frozen v0.1.5. Existing Excel assessments have been reconciled and retained; pending work concerns genuinely new discovery candidates, flagged evidence gaps and final author approval. Two external retrospective cases have been evaluated, without a claim of blinded predictive validation. The methodology update does not change engine behaviour or catalogue membership.
+Version 0.1.6 implements the evaluated v0.1.5 categorical assignments and reports screening-guidance status, a null numerical operating limit and condition-specific required observations. Three geothermal demonstrations and two external retrospective cases examine rule interpretation and applicability. Outcome-informed input encoding makes the external evaluation unblinded; predictive accuracy and operational benefit are not established. The software test suite verifies execution across 210 category-regression scenarios.

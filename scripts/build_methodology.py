@@ -50,10 +50,10 @@ def render(source):
 <a class="brand-lockup method-brand" href="./index.html" aria-label="Wellbore Studio selector"><span class="brand-mark" aria-hidden="true">W<span>·</span></span><span><span class="brand-name">Wellbore Studio</span><span class="brand-subtitle">METHODS &amp; EVIDENCE</span></span></a>
 <nav class="header-links" aria-label="Main navigation"><a href="./index.html">Open selector ↗</a><a href="https://github.com/NajafiIB/wellbore-stability-model-selector/blob/main/docs/methodology.md">GitHub source ↗</a></nav>
 </div>
-<div class="header-content method-hero"><p class="eyebrow">FROM LITERATURE TO ENGINEERING DECISIONS</p><h1>Review methodology<br><span>&amp; model-selection evidence</span></h1><p class="lede">How sources are selected and assessed, how the framework works, and what its evaluations establish.</p><div class="method-badges"><span>Methodology · 16 Oct 2026</span><span>Software · v0.1.6</span><span>Rules evaluated · v0.1.5</span></div></div>
+<div class="header-content method-hero"><p class="eyebrow">FROM LITERATURE TO ENGINEERING DECISIONS</p><h1>Review methodology<br><span>&amp; model-selection evidence</span></h1><p class="lede">How sources are selected and assessed, how the framework works, and what its evaluations establish.</p><div class="method-badges"><span>Structured critical review</span><span>Software · v0.1.6</span><span>Rules evaluated · v0.1.5</span></div></div>
 </header>
 <div class="method-layout"><aside class="method-toc"><nav aria-label="On this page"><p class="section-kicker">ON THIS PAGE</p>{navigation}</nav></aside>
-<main id="methodology-content" class="method-content" tabindex="-1"><div class="method-notice"><strong>Evidence status</strong><p>Existing Excel assessments are retained. The review package awaits final author approval. Two external retrospective cases are evaluated; independent predictive validation is not established.</p></div>{content}</main></div>
+<main id="methodology-content" class="method-content" tabindex="-1"><div class="method-notice"><strong>Conditions → mechanisms → models → decisions → observations</strong><p>A framework for selecting modelling approaches across the geothermal well lifecycle, supported by claim-specific evidence appraisal and retrospective case evaluation.</p></div>{content}</main></div>
 <footer><p><strong>Wellbore Studio</strong> · Iman Najafi and Dariusz Knez · <a href="./index.html">Return to selector</a> · <a href="https://github.com/NajafiIB/wellbore-stability-model-selector">Repository</a></p></footer>
 </body></html>
 '''
