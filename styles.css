@@ -140,6 +140,8 @@ footer p { margin: 0; color: #62778f; font-size: 11px; }
   footer { padding: 20px 18px; }
 }
 @media (max-width: 440px) {
+  .brand-bar { flex-wrap: wrap; gap: 12px; padding: 14px 0; }
+  .header-links { flex-wrap: wrap; }
   .brand-subtitle { font-size: 8px; }
   .header-links a { font-size: 10px; }
   .article-banner { padding: 13px; gap: 9px; }
