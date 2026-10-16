@@ -86,3 +86,7 @@ The `build:data` script is retained for the earlier WBS-only source workflow. It
 ## Citation
 
 If you use the tool, cite the associated review article and this repository. The file `CITATION.cff` provides citation metadata that GitHub can display automatically.
+
+## Revision candidate 0.1.6
+
+Adds explicit screening-guidance status, a null operating-limit field, and condition-specific required observations to UI and JSON results. Categorical rule assignments remain those of frozen v0.1.5. Reopened manuscript screening is pending author adjudication; public catalogue counts remain the verified 208 analytic records. See docs/methodology.md.
