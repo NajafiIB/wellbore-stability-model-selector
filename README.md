@@ -17,7 +17,13 @@ The tool implements the **Geothermal Wellbore Stability Lifecycle Model-Selectio
 - Exports a JSON result for documentation or supplementary workflows.
 - Runs entirely in the browser with no database, no backend, and no login.
 
-The two public metadata files together represent the submitted S1 inventory: **208 analytic records** (143 Core and 65 Useful) and five audit-only records (three Background and two Exclude). The 18 geothermal-extension IDs are already among the 208 analytic records; they are stored in a separate file only for maintenance and are loaded once. The five audit-only records are never ranked as related papers. These counts describe the assembled corpus, not publication prevalence.
+The public metadata files retain the submission-era catalogue. They are not the reconciled author-review S1: identical headline totals do not imply identical membership. Audit-only records are excluded from related-paper ranking. Reproduce current manuscript counts and appraisal conclusions from reconciled S1, not from website results. See the [full methodology](docs/methodology.md) for the current evidence and version boundaries.
+
+## Methodology and evidence
+
+Read the [public methodology page](https://najafiib.github.io/wellbore-stability-model-selector/methodology.html) or its [Markdown source](docs/methodology.md). It covers discovery and exact queries, eligibility, duplicate handling, existing Excel assessments, claim appraisal, rule interpretation, uncertainty, external case evaluation and remaining work.
+
+The checked-in public page is generated from that Markdown source with `python scripts/build_methodology.py`. Run `python scripts/build_methodology.py --check` to verify parity. The page is static and requires no browser-side Markdown rendering.
 
 ## What the tool does not do
 
@@ -87,6 +93,6 @@ The `build:data` script is retained for the earlier WBS-only source workflow. It
 
 If you use the tool, cite the associated review article and this repository. The file `CITATION.cff` provides citation metadata that GitHub can display automatically.
 
-## Revision candidate 0.1.6
+## Deployed version 0.1.6
 
-Adds explicit screening-guidance status, a null operating-limit field, and condition-specific required observations to UI and JSON results. Categorical rule assignments remain those of frozen v0.1.5. Reopened manuscript screening is pending author adjudication; public catalogue counts remain the verified 208 analytic records. See docs/methodology.md.
+Adds explicit screening-guidance status, a null operating-limit field, and condition-specific required observations to UI and JSON results. Categorical assignments remain those of frozen v0.1.5. Existing Excel assessments have been reconciled and retained; pending work concerns genuinely new discovery candidates, flagged evidence gaps and final author approval. Two external retrospective cases have been evaluated, without a claim of blinded predictive validation. The methodology update does not change engine behaviour or catalogue membership.
