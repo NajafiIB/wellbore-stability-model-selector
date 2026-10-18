@@ -1,112 +1,39 @@
-from __future__ import annotations
+"""Build public metadata from an explicitly supplied consolidated S1 dataset.
 
-import csv
-import json
+The source JSON is not committed: only bibliographic metadata and bounded
+paraphrases are exported. Audit records, source text, local paths and attribution
+fields are deliberately omitted.
+"""
 from pathlib import Path
-
-
-ROOT = Path(__file__).resolve().parents[2]
-APP_ROOT = Path(__file__).resolve().parents[1]
-OLD_RECORDS = ROOT / "work" / "review_workflow_records.csv"
-NEW_RECORDS = ROOT / "outputs" / "v12_new_papers_records.json"
-OUT = APP_ROOT / "data" / "papers.json"
-
-
-def clean(value):
-    if value is None:
-        return ""
-    return str(value).strip()
-
-
-def doi_url(doi):
-    value = clean(doi)
-    if not value:
-        return ""
-    value = value.replace("https://doi.org/", "").replace("http://doi.org/", "")
-    return f"https://doi.org/{value}"
-
-
-def old_record(row):
-    return {
-        "id": clean(row.get("paper_id")),
-        "title": clean(row.get("paper_title")),
-        "authors": clean(row.get("authors")),
-        "year": clean(row.get("publication_year")),
-        "venue": clean(row.get("journal_conference")),
-        "doi": clean(row.get("doi")),
-        "doiUrl": doi_url(row.get("doi")),
-        "classification": clean(row.get("screening_classification")),
-        "stage": clean(row.get("operational_stage")),
-        "theme": clean(row.get("technical_theme")),
-        "modelType": clean(row.get("model_type")),
-        "failureCriterion": clean(row.get("failure_criterion")),
-        "formation": clean(row.get("formation_rock_type")),
-        "wellType": clean(row.get("well_type")),
-        "coupling": clean(row.get("coupling_considered")),
-        "validation": clean(row.get("validation_type")),
-        "validationStrength": "",
-        "confidenceScore": "",
-        "citations": "",
-        "keyContribution": clean(row.get("key_contribution")),
-        "limitation": clean(row.get("main_limitation")),
-        "relevance": clean(row.get("relevance_to_review")),
-        "recommendedUse": "",
-        "avoidUse": "",
-        "source": "Integrated review matrix"
-    }
-
-
-def new_record(row):
-    return {
-        "id": clean(row.get("paper_id")),
-        "title": clean(row.get("title")),
-        "authors": clean(row.get("authors")),
-        "year": clean(row.get("year")),
-        "venue": clean(row.get("journal")),
-        "doi": clean(row.get("doi")),
-        "doiUrl": doi_url(row.get("doi")),
-        "classification": clean(row.get("screening")),
-        "stage": clean(row.get("operational_stage")),
-        "theme": clean(row.get("technical_theme")),
-        "modelType": clean(row.get("model_type")),
-        "failureCriterion": clean(row.get("failure_criterion")),
-        "formation": clean(row.get("formation_rock_type")),
-        "wellType": clean(row.get("well_type")),
-        "coupling": clean(row.get("coupling_considered")),
-        "validation": clean(row.get("validation_type")),
-        "validationStrength": clean(row.get("validation_strength")),
-        "confidenceScore": clean(row.get("confidence_score") or row.get("total_score")),
-        "citations": clean(row.get("citations")),
-        "keyContribution": clean(row.get("key_contribution")),
-        "limitation": clean(row.get("main_limitation")),
-        "relevance": clean(row.get("relevance_to_review")),
-        "recommendedUse": clean(row.get("recommended_use_case")),
-        "avoidUse": clean(row.get("avoid_use_case")),
-        "source": "Integrated review matrix"
-    }
-
+from collections import Counter
+import argparse,json,re
+ROOT=Path(__file__).resolve().parents[1]
+def text(v):return str(v or '').strip()
+def url(v):return text(v) if text(v).startswith(('https://','http://')) else ''
+def make(r):
+ doi=text(r.get('DOI')).replace('https://doi.org/','')
+ if not re.match(r'^10\.\d{4,9}/\S+$',doi):doi=''
+ grade=r.get('Historical grade') if r.get('Historical grade') in ['Core','Useful'] else 'Included'
+ return dict(id=r['Paper ID'],title=r['Title'],authors=text(r.get('Authors')),year=text(r.get('Year')),venue=text(r.get('Venue')),doi=doi,doiUrl='https://doi.org/'+doi if doi else '',url=url(r.get('Source URL')),classification=grade,stage=r['Operational Stage'],secondaryStages=text(r.get('Secondary lifecycle tags')),theme=text(r.get('Technical Theme')),modelType=text(r.get('Prior model-type coding')),failureCriterion=text(r.get('Failure Criterion')),formation=text(r.get('Formation / Rock Type')),wellType=text(r.get('Well Type')),coupling=text(r.get('Coupling Considered')),validation=text(r.get('Calibration versus test')),validationStrength='',confidenceScore='',citations='',keyContribution=text(r.get('Assessment Rationale')),limitation=text(r.get('Transferability limit')),relevance=text(r.get('Assessment Rationale'))+' Evidence limit: '+text(r.get('Transferability limit')),recommendedUse=text(r.get('Recommended Use Case')),avoidUse=text(r.get('Avoid Use Case')),source='S1 consolidated evidence matrix',reviewExtent=text(r.get('Source review extent')),sourceLocator=text(r.get('Source locator')),publicationStatus=text(r.get('Publication status')),synthesisMember=True)
 
 def main():
-    records = []
-    with OLD_RECORDS.open("r", encoding="utf-8-sig", newline="") as f:
-        records.extend(old_record(row) for row in csv.DictReader(f))
-
-    with NEW_RECORDS.open("r", encoding="utf-8") as f:
-        records.extend(new_record(row) for row in json.load(f))
-
-    seen = set()
-    unique = []
-    for record in records:
-        key = record["id"] or record["doi"] or record["title"].lower()
-        if key in seen:
-            continue
-        seen.add(key)
-        unique.append(record)
-
-    unique.sort(key=lambda row: (row["id"], row["year"], row["title"]))
-    OUT.write_text(json.dumps(unique, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"Wrote {len(unique)} public records to {OUT}")
-
-
-if __name__ == "__main__":
-    main()
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--source',type=Path,required=True,help='Reproducibility/dataset.json from the current S1 package')
+    p.add_argument('--snapshot-date',required=True,help='Date of the supplied evidence snapshot, YYYY-MM-DD')
+    p.add_argument('--check',action='store_true')
+    args=p.parse_args()
+    source=json.loads(args.source.read_text(encoding='utf8'))
+    records=[make(r) for r in source['records']]
+    ids=[r['id'] for r in records]
+    if len(ids)!=len(set(ids)):raise ValueError('Duplicate stable IDs in source dataset')
+    counts=dict(Counter(r['stage'] for r in records))
+    if counts!=source['counts']['primary_stages']:raise ValueError('Source stage counts do not reconcile')
+    snapshot={'version':args.snapshot_date,'synthesisRecords':len(records),'primaryStages':counts,'ids':ids,'scope':'S1 synthesis membership; source records are not independent experiments','reviewType':'Structured critical review; exhaustive screening and independent duplicate assessment are not claimed'}
+    outputs={'papers.json':[r for r in records if not r['id'].startswith('GEO-')],'geothermal-papers.json':[r for r in records if r['id'].startswith('GEO-')],'evidence-corpus.json':snapshot}
+    for name,value in outputs.items():
+        target=ROOT/'data'/name
+        if args.check:
+            if json.loads(target.read_text(encoding='utf8'))!=value:raise ValueError('Outdated public metadata: '+name)
+        else:target.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+    print(f'{len(records)} source records reconcile with the supplied S1 dataset')
+if __name__=='__main__':main()

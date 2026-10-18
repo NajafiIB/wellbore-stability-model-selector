@@ -87,7 +87,7 @@ The public data files `data/papers.json` and `data/geothermal-papers.json` conta
 
 It does **not** include copyrighted paper text or PDFs.
 
-The `build:data` command accepts the WBS source schema only. The complete website catalogue comprises both `data/papers.json` and `data/geothermal-papers.json`; this command is not an integrated-corpus builder.
+The public catalogue is generated from the consolidated S1 dataset. Run `python scripts/build_public_data.py --source /path/to/Reproducibility/dataset.json --snapshot-date 2026-10-18` to build both catalogue files and the membership manifest. Add `--check` for read-only reconciliation. The source dataset remains local; only bibliographic metadata and bounded evidence summaries are exported. Audit-only and unassessed discovery records are excluded.
 
 ## Citation
 
@@ -95,4 +95,4 @@ If you use the tool, cite the associated review article and this repository. The
 
 ## Software and evaluation
 
-Version 0.1.6 implements the evaluated v0.1.5 categorical assignments and reports screening-guidance status, a null numerical operating limit and condition-specific required observations. Three geothermal demonstrations and two external retrospective cases examine rule interpretation and applicability. Outcome-informed input encoding makes the external evaluation unblinded; predictive accuracy and operational benefit are not established. The software test suite verifies execution across 210 category-regression scenarios.
+Version 0.1.7 implements the evaluated v0.1.5 categorical assignments and reports screening-guidance status, a null numerical operating limit and condition-specific required observations. Three geothermal demonstrations and two external retrospective cases examine rule interpretation and applicability. Outcome-informed input encoding makes the external evaluation unblinded; predictive accuracy and operational benefit are not established. The software test suite verifies execution across 210 category-regression scenarios.

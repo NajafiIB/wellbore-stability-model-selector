@@ -4,7 +4,7 @@ title: "Geothermal Wellbore Stability Lifecycle Model Selector"
 authors:
   - family-names: "Najafi"
     given-names: "Iman"
-version: "0.1.6"
+version: "0.1.7"
 repository-code: "https://github.com/NajafiIB/wellbore-stability-model-selector"
 url: "https://najafiib.github.io/wellbore-stability-model-selector/"
 keywords:
