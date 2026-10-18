@@ -168,7 +168,7 @@ export function summarizeStatuses(layerResults) {
 }
 
 function paperStageScore(paper, stage) {
-  const text = normalizeText(paper.stage);
+  const text = normalizeText(`${paper.stage || ""} ${paper.secondaryStages || ""}`);
   if (stage === "before" && text.includes("before")) return 6;
   if (stage === "during" && text.includes("during")) return 6;
   if (stage === "after" && text.includes("after")) return 6;
@@ -198,7 +198,7 @@ export function rankRelatedPapers(papers, input, layerResults, limit = 12) {
   const activeLayerIds = new Set(layerResults.filter((layer) => layer.status).map((layer) => layer.id));
 
   return papers
-    .filter((paper) => (paper.doi || paper.url) && ["Core", "Useful"].includes(paper.classification))
+    .filter((paper) => (paper.doi || paper.url) && ["Core", "Useful", "Included"].includes(paper.classification))
     .map((paper) => {
       let score = 0;
       const blob = [

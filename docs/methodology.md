@@ -24,19 +24,33 @@ Source identification combines topical searches and citation tracing across rock
 
 Bibliographic records identify each source by stable paper ID, title, authors, venue, year and DOI or persistent link. Search records and source locators support traceability. Search-only records do not contribute to synthesis counts.
 
+Nine OpenAlex query families use a publication cutoff of 16 October 2026 and were executed on 16–18 October 2026 (Europe/Warsaw). Complete retrieval yields 10,514 distinct discovery identifiers after identifier reconciliation. Search retrieval does not determine synthesis eligibility. Exact requests and source dispositions are recorded in S1A.
+
+| Query | Retrieved records |
+| --- | --- |
+| "geothermal wellbore" stability | 149 |
+| "geothermal well" "lost circulation" | 780 |
+| "geothermal well" completion | 3101 |
+| "geothermal well" injection | 4615 |
+| "geothermal well" production | 8411 |
+| "geothermal wellbore" "thermal cycling" | 34 |
+| "geothermal" "wellbore" creep | 832 |
+| "geothermal well" maintenance | 2561 |
+| "geothermal well" intervention | 615 |
+
 ## 3. Eligibility and duplicate handling
 
 Eligibility requires an explicit connection to rock mechanics or failure, strength, fracture connectivity or losses, thermal or chemical effects, time-dependent deformation, or calibration and testing observations relevant to a wellbore decision. Barrier studies form a distinct application domain. Transfer studies require an identifiable mechanism and a stated limitation on geothermal applicability.
 
 General energy-resource or economic studies without this connection do not support the synthesis. Editorials and collection notices provide context rather than primary evidence. Peer-reviewed articles are preferred; relevant technical proceedings and other source types are identified individually. An inaccessible full text is an access limitation, not proof that a study is irrelevant. Abstract-supported claims are bounded by the information the abstract contains.
 
-Duplicate identification uses normalised DOI, normalised title and source-based checking of ambiguous versions. Repeated PDF copies represent one work. Conference and journal versions are linked and counted once. Stable paper IDs link eligibility decisions, coding and appraisal to their supporting records.
+Duplicate identification uses normalised DOI, normalised title and source-based checking of ambiguous versions. Repeated PDF copies represent one work. Related conference and journal reports are linked; they are collapsed only when source identity is established. Overlapping observations are not pooled. Stable paper IDs link eligibility decisions, coding and appraisal to their supporting records.
 
 ## 4. Evidence extraction and lifecycle classification
 
 S1 records study characteristics, eligibility decisions, assumptions, evidence mode, limitations, recommended use and supporting source locations. Review extent distinguishes original-paper evidence from abstract or metadata support. Screening and appraisal are represented by consolidated decisions; independent duplicate screening and inter-assessor agreement statistics are not claimed.
 
-Each source has one primary lifecycle classification based on its principal engineering decision or observed outcome. Secondary tags identify applications spanning several stages. The synthesis comprises 208 source records: 93 before drilling, 66 during drilling, 30 after drilling and 19 cross-cutting. Counts describe this evidence base and do not estimate the balance of publications across the field.
+Each source has one primary lifecycle classification based on its principal engineering decision or observed outcome. Secondary tags identify applications spanning several stages. The synthesis comprises 210 source records: 93 before drilling, 67 during drilling, 31 after drilling and 19 cross-cutting. Counts describe this evidence base and do not estimate the balance of publications across the field.
 
 Application-domain coding relies on article-supported evidence. A contextual mention of geothermal or petroleum energy does not establish the study's primary application. Mixed and indeterminate domains are identified explicitly. Background, duplicate and other audit records do not enter synthesis totals.
 
@@ -55,6 +69,8 @@ Appraisal relates each source to the particular claim for which it is used. Meas
 | Source support | Which passage, observation or calculation supports the interpretation? |
 
 Relevance labels support literature organisation; they are not validated quality scores. “Not reported” denotes information omitted by the reviewed source. “Not established” denotes information that cannot be determined from the available material. Extracted text alone does not establish a quantitative result or independent human assessment. Heterogeneous outcomes are compared by mechanism and decision, without pooling them into a single prediction-error ranking.
+
+Material-specific appraisal distinguishes analytical salt closure from laboratory creep in fractured granite. [Weijermars et al.](https://doi.org/10.1093/gji/ggt346) relate salt closure to pressure imbalance, viscosity and lateral creep; transfer requires an appropriate salt rheology. [Zhang et al.](https://doi.org/10.1155/2018/4653937) report six reactive-flow creep tests, but specimen/solution attribution differs between Table 1 and Section 3.1. Their qualitative mechanism evidence does not establish a well-scale failure time or a geothermal service lifetime.
 
 ## 6. Synthesis and framework construction
 
@@ -80,7 +96,7 @@ The thermal flag represents an analyst's assessment that thermal loading could c
 
 Every result is labelled `screening-guidance` and returns `operatingLimit: null`. Required observations appear in the interface and exported JSON. The selector does not ingest numerical stress, strength, connectivity or thermal histories needed to calculate a safe pressure, temperature or service-life limit. Selecting high data availability or field validation does not certify suitable observations exist.
 
-Related-paper ranking uses lifecycle and keyword matches, active layers and relevance labels, with topical weights for injection and maintenance. Only eligible public-catalogue entries with a DOI or URL are ranked. This is a navigation heuristic, not a reliability score. Source claims and applicability require checking before design use.
+Related-paper ranking uses lifecycle and keyword matches, active layers and relevance labels, with topical weights for injection and maintenance. Only included public-catalogue entries with a DOI or URL are ranked. Historical Core/Useful labels retain their navigation weights; newly appraised Included records carry no historical grade bonus. This is a navigation heuristic, not a reliability score. Source claims and applicability require checking before design use.
 
 ## 8. Uncertainty and resolving observations
 
@@ -118,9 +134,9 @@ Applicability is classified as concordant, partly supported or unsupported again
 | Supporting search records | Traceable search and bibliographic information, separate from analytical inclusion |
 | Public repository | Executable rule table, decision engine, bibliographic navigation catalogue and tests |
 
-The analytical corpus is defined by S1. The website's related-paper catalogue is a navigation resource and does not define the manuscript's inclusion decisions or counts. Its coverage is not identical to S1. Source articles are linked through bibliographic records; copyrighted full texts are not redistributed.
+The analytical corpus is defined by S1. The website's related-paper catalogue is a navigation resource and does not define the manuscript's inclusion decisions or counts. Its stable-ID membership matches the 210 S1 synthesis records. Audit-only records and unassessed search candidates are excluded. Primary stage counts use the exclusive S1 classification; secondary stage tags support navigation. Source articles are linked through bibliographic records; copyrighted full texts are not redistributed.
 
-The companion interface is version 0.1.6 and implements the evaluated v0.1.5 categorical assignments. Each exported result identifies screening guidance, required observations and a null numerical operating limit. Rule execution is checked by the software test suite, including 210 category-regression scenarios. These tests establish implementation behaviour, not scientific accuracy.
+The companion interface is version 0.1.7 and implements the evaluated v0.1.5 categorical assignments. Each exported result identifies screening guidance, required observations and a null numerical operating limit. Rule execution is checked by the software test suite, including 210 category-regression scenarios. These tests establish implementation behaviour, not scientific accuracy.
 
 Run `npm test` for rule-execution checks. Run `python scripts/build_methodology.py --check` to verify that this document and the public methodology page match. The [repository](https://github.com/NajafiIB/wellbore-stability-model-selector) contains the implementation and reproducible software tests.
 
