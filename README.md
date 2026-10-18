@@ -6,6 +6,8 @@ This repository contains a public, no-login, static companion tool for the revie
 
 Authors: **Iman Najafi** (World Business Council, Warsaw) and **Dariusz Knez** (AGH University of Krakow). The article title and authors appear on the website's research credit panel.
 
+The tool includes explicit weak-material and fines/clogging conditions. Casing diagnosis does not make a Mechanical Earth Model mandatory.
+
 The tool implements the **Geothermal Wellbore Stability Lifecycle Model-Selection Framework** across drilling, injection/operation and maintenance/workover. Users select lifecycle stage, formation type, well geometry, dominant failure mechanism, data availability, uncertainty level, validation evidence, and integrity consequence. The tool returns recommended model families, validation needs, warnings, operational decisions supported, and source-linked related articles from the public metadata corpus.
 
 ## What the tool does
@@ -17,7 +19,7 @@ The tool implements the **Geothermal Wellbore Stability Lifecycle Model-Selectio
 - Exports a JSON result for documentation or supplementary workflows.
 - Runs entirely in the browser with no database, no backend, and no login.
 
-The analytical corpus is defined by Supplementary Material S1. The website literature catalogue supports topic navigation and does not define manuscript inclusion decisions or counts; its coverage is not identical to S1. Audit-only catalogue records are excluded from related-paper ranking. See the [full methodology](docs/methodology.md).
+The analytical corpus is defined by Supplementary Material S1. The website literature catalogue supports topic navigation and does not define manuscript inclusion decisions or counts; its membership matches S1. Audit-only catalogue records are excluded from related-paper ranking. See the [full methodology](docs/methodology.md).
 
 ## Methodology and evidence
 
@@ -95,4 +97,4 @@ If you use the tool, cite the associated review article and this repository. The
 
 ## Software and evaluation
 
-Version 0.1.7 implements the evaluated v0.1.5 categorical assignments and reports screening-guidance status, a null numerical operating limit and condition-specific required observations. Three geothermal demonstrations and two external retrospective cases examine rule interpretation and applicability. Outcome-informed input encoding makes the external evaluation unblinded; predictive accuracy and operational benefit are not established. The software test suite verifies execution across 210 category-regression scenarios.
+Version 0.2.0 implements the explicit weak-material, fines-transport and diagnostic-scope specification and reports screening-guidance status, a null numerical operating limit and condition-specific required observations. Three geothermal demonstrations and two development-linked retrospective cases and two sources excluded from rule development examine mechanism coverage and applicability. Outcome-informed input encoding makes the external evaluation unblinded; predictive accuracy and operational benefit are not established. The software test suite verifies execution across 210 comparisons to the archived baseline, with documented MEM changes and mechanism-specific tests.

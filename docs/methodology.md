@@ -12,7 +12,7 @@ Petroleum and laboratory studies contribute where their mechanisms inform geothe
 
 ## 2. Source identification and bibliographic verification
 
-Source identification combines topical searches and citation tracing across rock-mechanics, petroleum-engineering and geothermal journals and technical proceedings. Search concepts cover wellbore stability, lost circulation, completion, injection, production, thermal cycling, creep and intervention. Citation counts inform reading priority; scientific reliability is assessed from methods, observations and applicability.
+Selection is purposive and represents foundational formulations, decision-changing mechanisms and geothermal lifecycle observations. Source identification combines topical searches and citation tracing across rock-mechanics, petroleum-engineering and geothermal journals and technical proceedings. Search concepts cover wellbore stability, lost circulation, completion, injection, production, thermal cycling, creep and intervention. Citation counts inform reading priority; scientific reliability is assessed from methods, observations and applicability.
 
 | Source | Function | Interpretation |
 | --- | --- | --- |
@@ -24,7 +24,7 @@ Source identification combines topical searches and citation tracing across rock
 
 Bibliographic records identify each source by stable paper ID, title, authors, venue, year and DOI or persistent link. Search records and source locators support traceability. Search-only records do not contribute to synthesis counts.
 
-Nine OpenAlex query families use a publication cutoff of 16 October 2026 and were executed on 16–18 October 2026 (Europe/Warsaw). Complete retrieval yields 10,514 distinct discovery identifiers after identifier reconciliation. Search retrieval does not determine synthesis eligibility. Exact requests and source dispositions are recorded in S1A.
+Nine OpenAlex query families use a publication cutoff of 16 October 2026 and were executed on 16–18 October 2026 (Europe/Warsaw). Complete retrieval yields 10,514 distinct discovery identifiers after identifier reconciliation. Search retrieval does not determine synthesis eligibility. Exact requests and source dispositions are recorded in S1A. The broad retrieval inventory is a discovery and coverage resource. It is not presented as a completely screened systematic-review pool; only sources with recorded inclusion and a defined claim/context role enter the critical synthesis.
 
 | Query | Retrieved records |
 | --- | --- |
@@ -48,7 +48,7 @@ Duplicate identification uses normalised DOI, normalised title and source-based 
 
 ## 4. Evidence extraction and lifecycle classification
 
-S1 records study characteristics, eligibility decisions, assumptions, evidence mode, limitations, recommended use and supporting source locations. Review extent distinguishes original-paper evidence from abstract or metadata support. Screening and appraisal are represented by consolidated decisions; independent duplicate screening and inter-assessor agreement statistics are not claimed.
+S1 records current model families, study characteristics, eligibility decisions, assumptions, evidence mode, limitations, recommended use and supporting source locations. Direct claim/rule sources receive targeted claim-specific appraisal. Additional context records do not supply a sample denominator, comparative error estimate or independent-validation claim. Historical model/quality labels are kept separately from current scientific coding. Review extent distinguishes original-paper evidence from abstract or metadata support. Screening and appraisal are represented by consolidated decisions; independent duplicate screening and inter-assessor agreement statistics are not claimed.
 
 Each source has one primary lifecycle classification based on its principal engineering decision or observed outcome. Secondary tags identify applications spanning several stages. The synthesis comprises 210 source records: 93 before drilling, 67 during drilling, 31 after drilling and 19 cross-cutting. Counts describe this evidence base and do not estimate the balance of publications across the field.
 
@@ -96,6 +96,10 @@ The thermal flag represents an analyst's assessment that thermal loading could c
 
 Every result is labelled `screening-guidance` and returns `operatingLimit: null`. Required observations appear in the interface and exported JSON. The selector does not ingest numerical stress, strength, connectivity or thermal histories needed to calculate a safe pressure, temperature or service-life limit. Selecting high data availability or field validation does not certify suitable observations exist.
 
+Weak or poorly consolidated material has an explicit formation category. Selecting it does not activate the competent-rock condition. An explicit fines/clogging mechanism requires particle-transport and injectivity assessment, with solids, particle sizes, compatibility and interval pressure/rate/skin observations. This layer does not calculate treatment success or injection pressure.
+
+Post-drill observations recommend MEM integration; they do not make it necessary for every casing-inspection decision. Maintenance results request barrier observations, while a rock/stress question requires separate material and stress inputs.
+
 Related-paper ranking uses lifecycle and keyword matches, active layers and relevance labels, with topical weights for injection and maintenance. Only included public-catalogue entries with a DOI or URL are ranked. Historical Core/Useful labels retain their navigation weights; newly appraised Included records carry no historical grade bonus. This is a navigation heuristic, not a reliability score. Source claims and applicability require checking before design use.
 
 ## 8. Uncertainty and resolving observations
@@ -112,18 +116,27 @@ Six reported categorical perturbations test recommendation sensitivity to change
 
 ## 9. Case evaluation and interpretation
 
-Evaluation uses the fixed version 0.1.5 categorical rules. Three demonstrations examine drilling transfer from GRT-1 to GRT-2, fractured-reservoir injection at Soultz, and inspection-led reconstruction of a Polish injection well. These illustrate rule interpretation using sources associated with framework development.
+Evaluation applies the version 0.2.0 specification to three demonstrations, two development-linked case interpretations and two further sources excluded from rule development. Demonstrations address GRT-1-to-GRT-2 drilling transfer, Soultz fractured-reservoir injection and inspection-led reconstruction of a Polish injection well.
 
-External retrospective evaluation comprises two published geothermal cases outside the development corpus. Input encoding uses published descriptions with outcomes available to the analyst. The assessment is unblinded and evaluates applicability to the mechanism and decision; it does not estimate prospective predictive accuracy. Source-supported inputs and analyst assumptions are distinguished in S1A.
+The two further published cases concern Szentes injection and Leyte casing inspection. Source-supported formation, operating stage and observed mechanism are distinguished from analyst assumptions about data, consequence and uncertainty. Published outcomes were available during encoding and inform the current rule interpretation. These are development-linked coverage assessments, not held-out predictive validation.
 
-| External case | Observations | Interpretation |
+| Case | Evidence | Interpretation |
 | --- | --- | --- |
-| Szentes, Hungary: one converted injection well | Stimulation and injectivity observations in weak sandstone | The sandstone input activates competent-rock logic; fines migration and clogging have no dedicated category. Treatment success and long-term injectivity are not predicted |
-| Leyte, Philippines: four selected wells from 14 solids-carryover wells | Casing-caliper observations including thinning and deformation | Diagnostic layers partly align with inspection. A Mechanical Earth Model is not demonstrated necessary for wall-thinning diagnosis; remaining casing life is not predicted |
+| Szentes, Hungary: one converted injection well | Weak sandstone, particle migration/clogging and intervention/injectivity observations | Weak-material and fines inputs select particle-transport/injectivity assessment without imposing competent-rock failure logic. Treatment effect, pressure limit and sustained injectivity are not predicted |
+| Leyte, Philippines: four selected wells from fourteen solids-carryover candidates | Casing-caliper thinning, deformation and collar observations | Integrity and back-analysis address inspection scope. MEM integration is recommended only where a separate rock/stress decision warrants it; no remaining-life forecast is supplied |
 
-Sources: [Farkas et al. (2025), Szentes stimulation comparison](https://doi.org/10.1186/s40517-025-00344-7) and [Buñing et al. (2005), Leyte casing-inspection surveys](https://www.worldgeothermal.org/pdf/IGAstandard/WGC/2005/2038.pdf).
+Sources: [Farkas et al. (2025)](https://doi.org/10.1186/s40517-025-00344-7) and [Buñing et al. (2005)](https://www.worldgeothermal.org/pdf/IGAstandard/WGC/2005/2038.pdf).
 
-Applicability is classified as concordant, partly supported or unsupported against the reported mechanism and decision. Conceptual comparators represent intact-wall stress/failure analysis and generic inspection guidance; they are not calibrated competing forecasts. Six categorical perturbations examine sensitivity to input classification. Agreement with a diagnostic category does not establish an improvement in operational decisions or economic performance.
+Two additional source-separated checks use the version 0.2.0 rules and engine frozen before case selection. Neither source enters the development corpus or rule assignments. Published outcomes are visible during encoding, so the evaluation is retrospective and unblinded.
+
+| External source | Observations and comparator | Coverage finding |
+| --- | --- | --- |
+| [Gross Schonebeck stimulation](https://doi.org/10.1016/j.geothermics.2009.12.003) | Laboratory rock/proppant tests and well production/flowmeter observations; comparator: intact-wall stress/failure analysis | Fracture and particle mechanisms are represented, but proppant contact/closure and conductivity laws require further local modelling |
+| [Dezhou reinjection](https://doi.org/10.1186/s40517-025-00360-7) | Sandstone doublet injection/pumping and tracer tests; comparator: intact-wall failure screening | Weak-material/fines guidance covers a particle component; screen/gravel design, reactive scaling, oxygen and gas control remain additional requirements |
+
+Both cases have partial mechanism coverage. No success rate, field forecast-error estimate or economic benefit is inferred. [Exact inputs, outputs, source hashes and the frozen evaluation protocol](data/evaluation-v0.2.0.json) are available as a reproducible record.
+
+Conceptual comparators are intact-wall stress/failure analysis and generic inspection guidance. They are not calibrated competing field forecasts. Six categorical perturbations test interpretation sensitivity; separate illustrative stress/strength/cooling calculations test a physical decision boundary. Agreement with an activated diagnostic category does not establish decision improvement, economic benefit or forecast accuracy.
 
 ## 10. Reproducibility and software
 
@@ -136,7 +149,7 @@ Applicability is classified as concordant, partly supported or unsupported again
 
 The analytical corpus is defined by S1. The website's related-paper catalogue is a navigation resource and does not define the manuscript's inclusion decisions or counts. Its stable-ID membership matches the 210 S1 synthesis records. Audit-only records and unassessed search candidates are excluded. Primary stage counts use the exclusive S1 classification; secondary stage tags support navigation. Source articles are linked through bibliographic records; copyrighted full texts are not redistributed.
 
-The companion interface is version 0.1.7 and implements the evaluated v0.1.5 categorical assignments. Each exported result identifies screening guidance, required observations and a null numerical operating limit. Rule execution is checked by the software test suite, including 210 category-regression scenarios. These tests establish implementation behaviour, not scientific accuracy.
+The companion interface and evaluated rule specification are version 0.2.0. Each exported result identifies screening guidance, required observations and a null numerical operating limit. Rule execution is checked by the software test suite, including 210 legacy-input comparisons with documented category changes and explicit weak-material, fines and diagnostic checks. These tests establish implementation behaviour, not scientific accuracy.
 
 Run `npm test` for rule-execution checks. Run `python scripts/build_methodology.py --check` to verify that this document and the public methodology page match. The [repository](https://github.com/NajafiIB/wellbore-stability-model-selector) contains the implementation and reproducible software tests.
 
@@ -144,6 +157,6 @@ Run `npm test` for rule-execution checks. Run `python scripts/build_methodology.
 
 Search coverage is not demonstrably exhaustive, and the consolidated assessment does not establish independent duplicate screening. Field-wide prevalence and inter-assessor agreement are not estimated. Review extent varies among original papers, abstracts and publisher records; claim-specific appraisal is not a complete risk-of-bias assessment.
 
-The framework expresses conditional engineering judgments. External evaluation is retrospective and unblinded, and it does not establish forecast accuracy or decision benefit. Material mapping, fines-controlled injection and long-term deformation define important limits of applicability. The tool provides neither calibrated failure probabilities nor pressure or lifetime predictions.
+The framework expresses conditional engineering judgments. All case encoding is retrospective and unblinded. Two cases inform the specification; two further source-separated checks use the recorded frozen specification. They do not establish forecast accuracy or decision benefit. Particle transport requires a locally calibrated model, and long-term deformation remains outside categorical constitutive-law selection. The tool provides neither calibrated failure probabilities nor pressure or lifetime predictions.
 
 Model use requires a stated engineering decision, locally constrained inputs and observations appropriate to the predicted outcome. A borehole image, injection response and barrier leak test assess different claims. Independent predictive testing requires inputs fixed before outcome exposure and observations excluded from calibration.

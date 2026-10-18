@@ -14,7 +14,10 @@ assert.equal(combined.filter((paper) => paper.classification === "Core").length,
 assert.equal(combined.filter((paper) => paper.classification === "Useful").length, 60);
 assert.equal(combined.filter((paper) => paper.classification === "Included").length, 8);
 assert.ok(!combined.some(p => p.id === "WBS-004"));
-assert.ok(combined.find(p => p.id === "GEO-26").limitation.includes("specimens"));
+assert.match(combined.find(p => p.id === "GEO-26").limitation,/specimen 6/i);
+assert.match(combined.find(p => p.id === "WBS-009").modelType,/stress inversion/i);
+assert.match(combined.find(p => p.id === "WBS-078").failureCriterion,/Hoek-Brown/);
+assert.ok(!combined.find(p => p.id === "WBS-155").reviewExtent.includes("Full PDF"));
 
 function statusFor(result, layerId) {
   return result.layerResults.find((layer) => layer.id === layerId)?.status || "";
@@ -169,3 +172,17 @@ assert.equal(missingInputs.operatingLimit, null);
 assert.ok(missingInputs.warnings[0].includes("Screening guidance only"));
 
 console.log("Decision-engine tests passed.");
+
+const caseInput={stage:'injection',formation:'weakSandstone',geometry:'vertical',mechanisms:['fines'],pressureTemperature:'unknown',dataAvailability:'medium',validationEvidence:'field',uncertainty:'high',integrityConsequence:'medium',dataset:'none'};
+const weak=evaluateSelection(caseInput,rules);
+assert.ok(!weak.matchedRows.includes('competent_sandstone_carbonate'));
+assert.ok(weak.matchedRows.includes('weak_unconsolidated'));
+assert.equal(statusFor(weak,'finesTransport'),'R');
+assert.notEqual(statusFor(weak,'elasticKirsch'),'R');
+assert.equal(weak.operatingLimit,null);
+assert.ok(weak.requiredObservations.some(x=>/particle/i.test(x)));
+const diagnosis=evaluateSelection({...caseInput,stage:'maintenance',formation:'unknown',mechanisms:['postDrill']},rules);
+assert.notEqual(statusFor(diagnosis,'mem'),'R');
+assert.equal(statusFor(diagnosis,'integrity'),'R');
+assert.ok(!diagnosis.requiredObservations.some(x=>x.startsWith('Stress orientation')));
+console.log('Weak-formation, fines-transport and casing-diagnostic scope checks passed.');
