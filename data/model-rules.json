@@ -1,5 +1,5 @@
 {
-  "version": "0.1.7",
+  "version": "0.2.0",
   "frameworkName": "Geothermal Wellbore Stability Lifecycle Model-Selection Framework",
   "paperTitle": "An Open Source Wellbore Stability Modeling Framework for Geothermal Wells: Linking Failure Mechanisms, Evidence, and Lifecycle Decisions",
   "disclaimer": "This public tool is a decision-support implementation of a review-derived framework. It recommends model families, not individual software packages, and it does not replace site-specific geomechanical design or professional engineering judgement.",
@@ -216,6 +216,24 @@
         "barrier",
         "leakage"
       ]
+    },
+    {
+      "id": "finesTransport",
+      "label": "Fines transport / injectivity assessment",
+      "shortLabel": "Fines / injectivity",
+      "themeKeywords": [
+        "fines migration",
+        "injectivity",
+        "clogging"
+      ],
+      "paperKeywords": [
+        "fines",
+        "clogging",
+        "particle",
+        "skin",
+        "sandstone",
+        "injectivity"
+      ]
     }
   ],
   "heatmapRows": [
@@ -381,7 +399,7 @@
       "statuses": {
         "elasticKirsch": "C",
         "failureCriterion": "Rec",
-        "mem": "R",
+        "mem": "Rec",
         "weakPlane": "C",
         "poroelastic": "C",
         "shaleFluid": "C",
@@ -428,6 +446,31 @@
         "probabilistic": "Rec",
         "aiMl": "Rec",
         "postDrill": "Rec",
+        "integrity": "C"
+      }
+    },
+    {
+      "id": "weak_unconsolidated",
+      "label": "Weak or poorly consolidated formation",
+      "statuses": {
+        "elasticKirsch": "C",
+        "failureCriterion": "C",
+        "mem": "C",
+        "poroelastic": "Rec",
+        "numerical": "C",
+        "probabilistic": "Rec",
+        "finesTransport": "C",
+        "integrity": "C"
+      }
+    },
+    {
+      "id": "fines_migration",
+      "label": "Fines migration / clogging mechanism",
+      "statuses": {
+        "poroelastic": "Rec",
+        "numerical": "C",
+        "probabilistic": "Rec",
+        "finesTransport": "R",
         "integrity": "C"
       }
     }
@@ -502,6 +545,10 @@
       "casing-running records",
       "cementing records",
       "pressure/barrier tests"
+    ],
+    "finesTransport": [
+      "Particle-size and solids measurements; fluid compatibility",
+      "Interval injectivity and pressure/rate/skin response; treatment durability"
     ]
   }
 }

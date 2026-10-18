@@ -33,6 +33,8 @@ function conditionRows(input) {
 
   if (input.stage === "before" && input.dataAvailability === "low") rows.add("early_screening");
   if (formation === "sandstone" || formation === "carbonate") rows.add("competent_sandstone_carbonate");
+  if (formation === "weakSandstone" || formation === "unconsolidated") rows.add("weak_unconsolidated");
+  if (mechanisms.includes("fines")) rows.add("fines_migration");
   if (geometry === "deviated" || geometry === "horizontal") rows.add("deviated_horizontal");
   if (formation === "shale" || formation === "anisotropic") rows.add("laminated_anisotropic");
   if (formation === "shale" && (mechanisms.includes("hydration") || mechanisms.includes("chemical"))) rows.add("reactive_shale");
@@ -73,16 +75,23 @@ function buildWarnings(input, statuses) {
   if (mechanisms.includes("creep")) {
     warnings.push("Long-term creep is outside this categorical rule set. A site-specific time-dependent constitutive analysis and independent deformation or integrity observations are needed before a lifetime stability decision.");
   }
+  if (["weakSandstone", "unconsolidated"].includes(input.formation)) {
+    warnings.push("Poorly consolidated material requires consolidation, sanding and particle-mobility evidence. The competent-rock condition is not activated by this formation input.");
+  }
+  if (mechanisms.includes("fines")) {
+    warnings.push("Fines migration or clogging requires a particle-transport and injectivity assessment. The categorical layer does not predict treatment success, injectivity or a safe injection pressure.");
+  }
   return warnings;
 }
 
 export function requiredObservations(input) {
-  const observations = [
-    "Stress orientation and magnitude ranges, pore pressure, and their measurement or inversion basis.",
-    "Formation-specific strength, elastic properties, well geometry, and loading history.",
-    "A stated prediction target and observations reserved from calibration for testing."
-  ];
+  const observations = ["A stated engineering decision, well geometry and operating history, and observations reserved from calibration for testing."];
   const mechanisms = selectedMechanisms(input);
+  const rockDecision = input.stage !== "maintenance" || mechanisms.some(id => ["collapse", "tensile", "discontinuity", "weakPlane", "creep"].includes(id));
+  if (rockDecision) observations.push("Stress orientation/magnitude and pore-pressure ranges with their measurement basis, and formation-specific strength and elastic properties for the rock decision.");
+  if (["weakSandstone", "unconsolidated"].includes(input.formation) || mechanisms.includes("fines")) {
+    observations.push("Cementation/consolidation, particle-size distribution, produced or injected solids, fluid compatibility, interval injectivity, skin and pressure/rate response. Separate particle clogging from fracture activation.");
+  }
   if (["fractured", "faulted"].includes(input.formation) || mechanisms.includes("discontinuity")) {
     observations.push("Fracture orientation and connectivity, loss depths, dynamic pressure at loss onset, and injection or pressure-test response. Intact-rock fracture initiation is not a connected-fracture loss threshold.");
   }
@@ -105,6 +114,7 @@ function practicalDecision(input, statuses) {
   if (input.stage === "after") decisions.push("Back-analysis, MEM recalibration, next-well learning, and integrity lessons.");
   if (input.stage === "injection") decisions.push("Injection or production pressure-temperature envelope, rock-fracture surveillance, and separate casing-cement barrier monitoring.");
   if (input.stage === "maintenance") decisions.push("Locate casing, cement or formation damage; choose a workover or repair; verify integrity with a post-repair test before return to service.");
+  if (selectedMechanisms(input).includes("fines")) decisions.push("Distinguish fines migration, deposition and near-well skin from stress-controlled fracture response before choosing an injectivity intervention.");
   if (statuses.probabilistic === "R" || statuses.probabilistic === "Rec") decisions.push("Risk-based pressure-window and uncertainty-margin decisions.");
   if (statuses.integrity === "R" || statuses.integrity === "Rec") decisions.push("Intervals where hole quality may affect casing running, cement placement, annular isolation, or barrier quality.");
   return decisions;

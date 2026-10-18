@@ -58,8 +58,9 @@
             Formation or rock type
             <select name="formation">
               <option value="shale">Shale</option>
-              <option value="sandstone">Sandstone</option>
-              <option value="carbonate">Carbonate</option>
+              <option value="sandstone">Competent sandstone</option>
+              <option value="weakSandstone">Weak / poorly consolidated sandstone or sediment</option>
+              <option value="carbonate">Competent carbonate</option>
               <option value="anisotropic">Anisotropic or laminated rock</option>
               <option value="fractured">Fractured rock</option>
               <option value="faulted">Faulted interval</option>
@@ -91,11 +92,12 @@
           <fieldset>
             <legend>Dominant mechanism</legend>
             <label class="check"><input type="checkbox" name="mechanisms" value="collapse"> Breakout / collapse</label>
-            <label class="check"><input type="checkbox" name="mechanisms" value="tensile"> Tensile fracture / losses</label>
+            <label class="check"><input type="checkbox" name="mechanisms" value="tensile"> New tensile-fracture initiation</label>
             <label class="check"><input type="checkbox" name="mechanisms" value="weakPlane"> Weak planes / bedding</label>
             <label class="check"><input type="checkbox" name="mechanisms" value="hydration"> Hydration / osmosis</label>
-            <label class="check"><input type="checkbox" name="mechanisms" value="discontinuity"> Faults / fractures</label>
+            <label class="check"><input type="checkbox" name="mechanisms" value="discontinuity"> Faults / connected-fracture losses</label>
             <label class="check"><input type="checkbox" name="mechanisms" value="narrowWindow"> Narrow mud-weight window</label>
+            <label class="check"><input type="checkbox" name="mechanisms" value="fines"> Fines migration / clogging</label>
             <label class="check"><input type="checkbox" name="mechanisms" value="creep"> Long-term creep / deformation</label>
             <label class="check"><input type="checkbox" name="mechanisms" value="realTimeSymptoms"> Real-time symptoms</label>
             <label class="check"><input type="checkbox" name="mechanisms" value="postDrill"> Post-drill evidence</label>
