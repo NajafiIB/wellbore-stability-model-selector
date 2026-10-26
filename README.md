@@ -4,7 +4,7 @@ This repository contains a public, no-login, static companion tool for the revie
 
 **An Open Source Wellbore Stability Modeling Framework for Geothermal Wells: Linking Failure Mechanisms, Evidence, and Lifecycle Decisions**
 
-Authors: **Iman Najafi** (World Business Council, Warsaw) and **Dariusz Knez** (AGH University of Krakow). The article title and authors appear on the website's research credit panel.
+The article title and authors appear on the website's research credit panel.
 
 The tool includes explicit weak-material and fines/clogging conditions. Casing diagnosis does not make a Mechanical Earth Model mandatory.
 
